@@ -17,6 +17,8 @@ Plug 'keith/swift.vim'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'msanders/cocoa.vim'
 Plug 'eraserhd/vim-ios'
+Plug 'Raimondi/delimitMate'
+Plug 'haifengkao/objc_matchbracket'
 
 " tComment cool
 Plug 'vim-scripts/tComment'
@@ -56,7 +58,7 @@ Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 call plug#end()
 
