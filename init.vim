@@ -4,55 +4,33 @@ set nu
 
 filetype plugin on
 let mapleader = ","
-""autocmd VimEnter * NERDTree
 
 if (getcwd() == '~/AppCode/findr-ios')
   set makeprg=xcodebuild\ -workspace\ Findr.xcworkspace\ -scheme\ Findr\ -configuration\ Debug\
 endif
 
-" Py3 support
-let g:python_host_prog = '/usr/local/bin/python'
-let g:ycm_path_to_python_interpreter = '/usr/local/bin/python'
-"let g:python3_host_prog = '/usr/local/bin/python3'
-"let g:loaded_python_provider = 1
-"let g:loaded_python3_provider = 1
-"let g:python_host_skip_check = 1
-"let g:deoplete#enable_at_startup = 1
-
 " plug.vim
-
 call plug#begin('~/.nvim/plugged')
 
+Plug 'rking/ag.vim'
 Plug 'keith/swift.vim'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'msanders/cocoa.vim'
 Plug 'eraserhd/vim-ios'
 
-" JSHint
-"Plug 'wookiehangover/jshint.vim'
-
 " tComment cool
 Plug 'vim-scripts/tComment'
-
 Plug 'myhere/vim-nodejs-complete'
-
 Plug 'moll/vim-node'
-
-" SnipMate
-"Plug 'msanders/snipmate.vim'
-
-" Group dependencies, vim-snippets depends on ultisnips
-
 Plug 'majutsushi/tagbar'
-
 Plug 'morhetz/gruvbox'
 Plug 'SirVer/ultisnips' 
 Plug 'honza/vim-snippets'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree'
-"Plug 'scrooloose/syntastic'
-"Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 
 " Using git URL
 Plug 'junegunn/vim-github-dashboard'
@@ -68,42 +46,22 @@ Plug 'tpope/vim-dispatch'
 
 " Awesome Ctrl-P INSTALL MANUAL!
 Plug 'kien/ctrlp.vim'
-
-" m./h. switching
-"Plug 'eraserhd/vim-ios'
-
-"Plug 'rking/ag.vim'  " ag support for searching file
-
+Plug 'rking/ag.vim'  " ag support for searching file
 Plug 'Raimondi/delimitMate'    " Automatically insert closing brackets
-
 Plug 'tpope/vim-surround' 
-
 Plug 'qstrahl/vim-matchmaker'   " Highlight the term under the cursor
-
 Plug 'Chiel92/vim-autoformat'  " Auto-format code using existing formatters
-
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
-
 Plug 'vim-airline/vim-airline'
-
 Plug 'jeetsukumaran/vim-buffergator'
-
 Plug 'wakatime/vim-wakatime'
-
- Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-" Plug 'marijnh/tern_for_vim', {'do': 'npm install'}
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 call plug#end()
 
 colorscheme gruvbox
 set background=dark
-
-" UltiSnips config
-"inoremap <silent><expr><TAB> pumvisible() ? '\<C-n>' : '\<TAB>'
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " airline config
 let g:airline_powerline_fonts = 1
@@ -113,7 +71,6 @@ map <C-n> :NERDTreeToggle<CR>
 
 
 """""""""" tab management
-
 " Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
 
@@ -276,3 +233,5 @@ call NumberToggle()
 
 :au FocusLost * :set number
 :au FocusGained * :set relativenumber
+
+inoremap jj <Esc>:w<CR>
