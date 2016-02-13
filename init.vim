@@ -17,6 +17,9 @@ Plug 'keith/swift.vim'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'msanders/cocoa.vim'
 Plug 'eraserhd/vim-ios'
+Plug 'Raimondi/delimitMate'
+Plug 'haifengkao/objc_matchbracket'
+Plug 'mhinz/vim-startify'
 
 " tComment cool
 Plug 'vim-scripts/tComment'
@@ -56,7 +59,7 @@ Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 
 call plug#end()
 
@@ -235,3 +238,26 @@ call NumberToggle()
 :au FocusGained * :set relativenumber
 
 inoremap jj <Esc>:w<CR>
+
+function! s:filter_header(lines) abort
+    let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
+    let centered_lines = map(copy(a:lines),
+        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
+    return centered_lines
+endfunction
+
+let g:startify_custom_header = s:filter_header([
+      \'                .__                 ___.                             ',
+      \'                |  |__  __ __   ____\_ |__ ___.__. ______            ',
+      \'                |  |  \|  |  \_/ __ \| __ <   |  |/  ___/            ',
+      \'                |   Y  \  |  /\  ___/| \_\ \___  |\___ \             ',
+      \'                |___|  /____/  \___  >___  / ____/____  >            ',
+      \'                     \/            \/    \/\/         \/             ',
+      \'                                                         .__         ',
+      \'                                  ____   ____  _______  _|__| _____  ',
+      \'                                 /    \_/ __ \/  _ \  \/ /  |/     \ ',
+      \'                                |   |  \  ___(  <_> )   /|  |  Y Y  \ ',
+      \'                                |___|  /\___  >____/ \_/ |__|__|_|  /',
+      \'                                     \/     \/                    \/ ',
+      \ '',
+      \ ])

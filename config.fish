@@ -39,6 +39,7 @@ end
 #aliases
 alias powconf "cd /usr/local/lib/python3.4/site-packages/powerline/"
 alias vim nvim
+alias v nvim
 alias ctags-objc "ctags --languages=objectivec --langmap=objectivec:.h.m.swift"
 
 
