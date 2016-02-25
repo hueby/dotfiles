@@ -40,6 +40,7 @@ end
 alias powconf "cd /usr/local/lib/python3.4/site-packages/powerline/"
 alias vim nvim
 alias v nvim
+alias t "tmux attach; or tmux"
 alias ctags-objc "ctags --languages=objectivec --langmap=objectivec:.h.m.swift"
 
 
@@ -69,6 +70,8 @@ function jenv
         command jenv $cmd $arg
     end
 end
+
+set -x GOPATH $HOME/Projekte/learning_go
 
 set PATH /usr/local/texlive/2015/bin/x86_64-darwin $PATH
 set PATH /Users/dennis/.local/bin $PATH
