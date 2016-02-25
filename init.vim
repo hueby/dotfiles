@@ -2,6 +2,9 @@
 sy on
 set nu
 
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
+
 filetype plugin on
 let mapleader = ","
 
@@ -21,6 +24,8 @@ Plug 'eraserhd/vim-ios'
 Plug 'Raimondi/delimitMate'
 Plug 'haifengkao/objc_matchbracket'
 Plug 'mhinz/vim-startify'
+Plug 'severin-lemaignan/vim-minimap'
+Plug 'joonty/vdebug'
 
 " tComment cool
 Plug 'vim-scripts/tComment'
@@ -43,7 +48,7 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'Shougo/deoplete.nvim'
 
 " Neomake
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 
 " Asynchronous build
 Plug 'tpope/vim-dispatch'   
@@ -66,6 +71,9 @@ Plug 'fatih/vim-go'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'garyburd/go-explorer'
+Plug 'wikitopian/hardmode'
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
 
 call plug#end()
 
@@ -178,28 +186,28 @@ com! -nargs=* -complete=file Vsp call Sp(1, <f-args>)
 " let g:ycm_key_list_select_completion=[]
 " let g:ycm_key_list_previous_completion=[]
 
-let g:neomake_javascript_jscs_maker = {
-    \ 'exe': 'jscs',
-    \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
-    \ 'errorformat': '%f: line %l\, col %c\, %m',
-    \ }
-
-let g:neomake_javascript_enabled_makers = ['jscs']
-
-
-let g:neomake_warning_sign = {
-  \ 'text': 'W',
-  \ 'texthl': 'WarningMsg',
-  \ }
-
-let g:neomake_error_sign = {
-  \ 'text': 'E',
-  \ 'texthl': 'ErrorMsg',
-  \ }
-
-autocmd! BufWritePost,BufEnter * Neomake
-
-let g:neomake_open_list = 2
+" let g:neomake_javascript_jscs_maker = {
+"     \ 'exe': 'jscs',
+"     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
+"     \ 'errorformat': '%f: line %l\, col %c\, %m',
+"     \ }
+" 
+" let g:neomake_javascript_enabled_makers = ['jscs']
+" 
+" 
+" let g:neomake_warning_sign = {
+"   \ 'text': 'W',
+"   \ 'texthl': 'WarningMsg',
+"   \ }
+" 
+" let g:neomake_error_sign = {
+"   \ 'text': 'E',
+"   \ 'texthl': 'ErrorMsg',
+"   \ }
+" 
+" autocmd! BufWritePost,BufEnter * Neomake
+" 
+" let g:neomake_open_list = 2
 
 " Ruby idention
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
@@ -232,19 +240,18 @@ let g:tagbar_type_swift = {
   \ 'sort' : 0
   \ }
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-call NumberToggle()
-" nnoremap <C-n> :call NumberToggle()<cr>
-
-:au FocusLost * :set number
-:au FocusGained * :set relativenumber
+"function! NumberToggle()
+"  if(&relativenumber == 1)
+"    set number
+"  else
+"    set relativenumber
+"  endif
+"endfunc
+"
+"nnoremap <C-n> :call NumberToggle()<cr>
+"
+":au FocusLost * :set number
+":au FocusGained * :set relativenumber
 
 inoremap jj <Esc>:w<CR>
 
@@ -280,3 +287,30 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
+
+set fdm=indent
+set fdc=4
+set fdl=1
