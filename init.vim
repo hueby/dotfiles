@@ -2,7 +2,7 @@
 sy on
 set nu
 
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+" autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
 
 filetype plugin on
@@ -143,7 +143,7 @@ nnoremap <Leader>y "*y
 nnoremap <Leader>p "*p
 nnoremap <Leader>P "*P
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " for more editing space
 set tabstop=2 shiftwidth=2 expandtab
@@ -254,18 +254,18 @@ function! s:filter_header(lines) abort
 endfunction
 
 let g:startify_custom_header = s:filter_header([
-      \'                .__                 ___.                             ',
-      \'                |  |__  __ __   ____\_ |__ ___.__. ______            ',
-      \'                |  |  \|  |  \_/ __ \| __ <   |  |/  ___/            ',
-      \'                |   Y  \  |  /\  ___/| \_\ \___  |\___ \             ',
-      \'                |___|  /____/  \___  >___  / ____/____  >            ',
-      \'                     \/            \/    \/\/         \/             ',
-      \'                                                         .__         ',
-      \'                                  ____   ____  _______  _|__| _____  ',
-      \'                                 /    \_/ __ \/  _ \  \/ /  |/     \ ',
-      \'                                |   |  \  ___(  <_> )   /|  |  Y Y  \ ',
-      \'                                |___|  /\___  >____/ \_/ |__|__|_|  /',
-      \'                                     \/     \/                    \/ ',
+      \'.__                 ___.                             ',
+      \'|  |__  __ __   ____\_ |__ ___.__. ______            ',
+      \'|  |  \|  |  \_/ __ \| __ <   |  |/  ___/            ',
+      \'|   Y  \  |  /\  ___/| \_\ \___  |\___ \             ',
+      \'|___|  /____/  \___  >___  / ____/____  >            ',
+      \'     \/            \/    \/\/         \/             ',
+      \'                                         .__         ',
+      \'                  ____   ____  _______  _|__| _____  ',
+      \'                 /    \_/ __ \/  _ \  \/ /  |/     \ ',
+      \'                |   |  \  ___(  <_> )   /|  |  Y Y  \ ',
+      \'                |___|  /\___  >____/ \_/ |__|__|_|  /',
+      \'                     \/     \/                    \/ ',
       \ '',
       \ ])
 
@@ -292,6 +292,4 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
-set fdm=indent
-set fdc=4
-set fdl=1
+autocmd FileType php setlocal fdm=indent fdc=2 fdl=1
