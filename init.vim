@@ -12,6 +12,7 @@ if (getcwd() == '~/AppCode/findr-ios')
   set makeprg=xcodebuild\ -workspace\ Findr.xcworkspace\ -scheme\ Findr\ -configuration\ Debug\
 endif
 
+
 " plug.vim
 call plug#begin('~/.nvim/plugged')
 
@@ -64,12 +65,19 @@ Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Shougo/neocomplete.vim'
+Plug 'fatih/vim-go'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'garyburd/go-explorer'
 Plug 'wikitopian/hardmode'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 call plug#end()
+
+let GoPath = '/usr/local/go'
 
 colorscheme gruvbox
 set background=dark
@@ -79,7 +87,8 @@ let g:airline_powerline_fonts = 1
 
 " NERDtree conf
 map <C-n> :NERDTreeToggle<CR>
-
+" autocmd VimEnter * NERDTree
+autocmd VimEnter * wincmd p
 
 """""""""" tab management
 " Enable the list of buffers
@@ -174,8 +183,8 @@ com! -nargs=* -complete=file Sp call Sp(0, <f-args>)
 com! -nargs=* -complete=file Vsp call Sp(1, <f-args>)
 
 " Solves YCM UltiSnips Sh8
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
+" let g:ycm_key_list_select_completion=[]
+" let g:ycm_key_list_previous_completion=[]
 
 " let g:neomake_javascript_jscs_maker = {
 "     \ 'exe': 'jscs',
@@ -268,6 +277,16 @@ let g:startify_custom_header = s:filter_header([
       \'                     \/     \/                    \/ ',
       \ '',
       \ ])
+nnoremap <C-x> :Startify<cr>
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-g>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
 
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
