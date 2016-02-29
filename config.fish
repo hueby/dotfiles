@@ -71,7 +71,8 @@ end
 #    end
 #end
 
-set -x GOPATH $HOME/Projekte/learning_go
+set -x GOPATH $HOME/Projekte/go $GOPATH
+set -x PATH=$GOPATH/bin $PATH
 
 set PATH /usr/local/texlive/2015/bin/x86_64-darwin $PATH
 set PATH /Users/dennis/.local/bin $PATH

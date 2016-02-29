@@ -1,11 +1,11 @@
 " classic
 sy on
 set nu
+set shell=bash
 
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
 
-filetype plugin on
 let mapleader = ","
 
 if (getcwd() == '~/AppCode/findr-ios')
@@ -16,16 +16,17 @@ endif
 " plug.vim
 call plug#begin('~/.nvim/plugged')
 
+Plug 'ervandew/supertab'
 Plug 'rking/ag.vim'
 Plug 'keith/swift.vim'
 Plug 'soramugi/auto-ctags.vim'
 Plug 'msanders/cocoa.vim'
 Plug 'eraserhd/vim-ios'
-Plug 'Raimondi/delimitMate'
 Plug 'haifengkao/objc_matchbracket'
 Plug 'mhinz/vim-startify'
 Plug 'severin-lemaignan/vim-minimap'
-Plug 'joonty/vdebug'
+" Plug 'joonty/vdebug'
+Plug 'tpope/vim-sensible'
 
 " tComment cool
 Plug 'vim-scripts/tComment'
@@ -33,8 +34,10 @@ Plug 'myhere/vim-nodejs-complete'
 Plug 'moll/vim-node'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
-Plug 'SirVer/ultisnips' 
+Plug 'tpope/vim-vividchalk'
+Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 " On-demand loading
 Plug 'scrooloose/nerdtree'
@@ -48,16 +51,16 @@ Plug 'junegunn/vim-github-dashboard'
 Plug 'Shougo/deoplete.nvim'
 
 " Neomake
-" Plug 'benekastah/neomake'
+Plug 'benekastah/neomake'
 
 " Asynchronous build
-Plug 'tpope/vim-dispatch'   
+Plug 'tpope/vim-dispatch'
 
 " Awesome Ctrl-P INSTALL MANUAL!
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'  " ag support for searching file
-Plug 'Raimondi/delimitMate'    " Automatically insert closing brackets
-Plug 'tpope/vim-surround' 
+" Plug 'Raimondi/delimitMate'    " Automatically insert closing brackets
+Plug 'tpope/vim-surround'
 Plug 'qstrahl/vim-matchmaker'   " Highlight the term under the cursor
 Plug 'Chiel92/vim-autoformat'  " Auto-format code using existing formatters
 Plug 'vim-ruby/vim-ruby'
@@ -65,10 +68,10 @@ Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'Shougo/neocomplete.vim'
 Plug 'fatih/vim-go'
-Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'garyburd/go-explorer'
 Plug 'wikitopian/hardmode'
@@ -79,8 +82,9 @@ call plug#end()
 
 let GoPath = '/usr/local/go'
 
-colorscheme gruvbox
 set background=dark
+" colorscheme gruvbox
+colorscheme vividchalk
 
 " airline config
 let g:airline_powerline_fonts = 1
@@ -182,38 +186,43 @@ endfunction
 com! -nargs=* -complete=file Sp call Sp(0, <f-args>)
 com! -nargs=* -complete=file Vsp call Sp(1, <f-args>)
 
-" Solves YCM UltiSnips Sh8
-" let g:ycm_key_list_select_completion=[]
-" let g:ycm_key_list_previous_completion=[]
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-k>"
+let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 
 " let g:neomake_javascript_jscs_maker = {
 "     \ 'exe': 'jscs',
 "     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
 "     \ 'errorformat': '%f: line %l\, col %c\, %m',
 "     \ }
-" 
+"
 " let g:neomake_javascript_enabled_makers = ['jscs']
-" 
-" 
-" let g:neomake_warning_sign = {
-"   \ 'text': 'W',
-"   \ 'texthl': 'WarningMsg',
-"   \ }
-" 
-" let g:neomake_error_sign = {
-"   \ 'text': 'E',
-"   \ 'texthl': 'ErrorMsg',
-"   \ }
-" 
+"
+"
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
+
 " autocmd! BufWritePost,BufEnter * Neomake
-" 
-" let g:neomake_open_list = 2
+
+let g:neomake_open_list = 2
 
 " Ruby idention
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
 autocmd FileType ruby compiler ruby
 
 " vim-ruby completions
+filetype plugin on
 autocmd BufNewFile,BufRead *.jbuilder set filetype=ruby
 autocmd BufNewFile,BufRead *.rabl     set filetype=ruby
 autocmd User Rails                    silent! Rlcd
@@ -240,18 +249,19 @@ let g:tagbar_type_swift = {
   \ 'sort' : 0
   \ }
 
-"function! NumberToggle()
-"  if(&relativenumber == 1)
-"    set number
-"  else
-"    set relativenumber
-"  endif
-"endfunc
-"
-"nnoremap <C-n> :call NumberToggle()<cr>
-"
-":au FocusLost * :set number
-":au FocusGained * :set relativenumber
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+call NumberToggle()
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+:au FocusLost * :set number
+:au FocusGained * :set relativenumber
 
 inoremap jj <Esc>:w<CR>
 
@@ -279,15 +289,6 @@ let g:startify_custom_header = s:filter_header([
       \ ])
 nnoremap <C-x> :Startify<cr>
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-g>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-
 " Highlight all instances of word under cursor, when idle.
 " Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
@@ -312,3 +313,56 @@ function! AutoHighlightToggle()
 endfunction
 
 autocmd FileType php setlocal fdm=indent fdc=2 fdl=1
+
+" GoTags config
+
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : 'gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" autocmd BufWritePre * :%s/\s\+$//e
+
+" Go things
+" use goimports for formatting
+let g:go_fmt_command = "goimports"
+
+" turn highlighting on
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+
+let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
+
+" Open go doc in vertical window, horizontal, or tab
+autocmd Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
+autocmd FileType go let $GOPATH = "/Users/dennis/Projekte/go"
+autocmd FileType go let $PATH = "/Users/dennis/Projekte/go/bin".$PATH
