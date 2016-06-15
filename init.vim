@@ -1,17 +1,12 @@
 " classic
 sy on
 set nu
-set shell=bash
+set shell=zsh
 
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
 
 let mapleader = ","
-
-if (getcwd() == '~/AppCode/findr-ios')
-  set makeprg=xcodebuild\ -workspace\ Findr.xcworkspace\ -scheme\ Findr\ -configuration\ Debug\
-endif
-
 
 " plug.vim
 call plug#begin('~/.nvim/plugged')
@@ -25,7 +20,6 @@ Plug 'eraserhd/vim-ios'
 Plug 'haifengkao/objc_matchbracket'
 Plug 'mhinz/vim-startify'
 Plug 'severin-lemaignan/vim-minimap'
-" Plug 'joonty/vdebug'
 Plug 'tpope/vim-sensible'
 
 " tComment cool
