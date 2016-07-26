@@ -198,23 +198,18 @@ endfunction
 com! -nargs=* -complete=file Sp call Sp(0, <f-args>)
 com! -nargs=* -complete=file Vsp call Sp(1, <f-args>)
 
+" YouCompleteMe and UltiSnips compatibility, with the helper of supertab
+let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>', '<Up>']
+
+let g:SuperTabDefaultCompletionType = '<C-n>'
+let g:SuperTabCrMapping = 0
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-k>"
-let g:UltiSnipsJumpBackwardTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-" let g:neomake_javascript_jscs_maker = {
-"     \ 'exe': 'jscs',
-"     \ 'args': ['--no-color', '--preset', 'airbnb', '--reporter', 'inline', '--esnext'],
-"     \ 'errorformat': '%f: line %l\, col %c\, %m',
-"     \ }
-"
-" let g:neomake_javascript_enabled_makers = ['jscs']
-"
-"
 let g:neomake_warning_sign = {
   \ 'text': 'W',
   \ 'texthl': 'WarningMsg',
@@ -391,3 +386,8 @@ let g:notes_directories = ['~/Library/Mobile Documents/com~apple~CloudDocs/Deskt
 let g:phpcomplete_index_composer_command="composer"
 
 
+highlight LineNr ctermfg=none ctermbg=none
+
+
+nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>

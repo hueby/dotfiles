@@ -72,12 +72,12 @@ end
 #end
 
 set -x GOPATH $HOME/Projekte/go $GOPATH
-set -x PATH=$GOPATH/bin $PATH
+set -x PATH $GOPATH/bin $PATH
 
-set PATH /usr/local/texlive/2015/bin/x86_64-darwin $PATH
-set PATH /Users/dennis/.local/bin $PATH
-set PATH /usr/local/mysql/bin $PATH
-set GEM_HOME ~/.ruby $GEM_HOME
+set -x PATH /usr/local/texlive/2015/bin/x86_64-darwin $PATH
+set -x PATH /Users/dennis/.local/bin $PATH
+set -x PATH /usr/local/mysql/bin $PATH
+set -x GEM_HOME ~/.ruby $GEM_HOME
 
  function fish_prompt
      ~/git-repos/powerline-shell/powerline-shell.py --cwd-mode dironly --cwd-max-depth 2 $status --shell bare ^/dev/null
