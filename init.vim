@@ -1,31 +1,35 @@
 " classic
 sy on
 set nu
-set shell=bash
+set shell=zsh
+autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+autocmd VimLeave * call system("tmux rename-window zsh")
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+set title
+
+:nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>y <Esc>:call ToggleHardMode()<CR>
 
 let mapleader = ","
 
-if (getcwd() == '~/AppCode/findr-ios')
-  set makeprg=xcodebuild\ -workspace\ Findr.xcworkspace\ -scheme\ Findr\ -configuration\ Debug\
-endif
-
-
 " plug.vim
 call plug#begin('~/.nvim/plugged')
 
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
+
+Plug 'vitalk/vim-simple-todo'
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
+
 Plug 'ervandew/supertab'
 Plug 'rking/ag.vim'
-Plug 'keith/swift.vim'
 Plug 'soramugi/auto-ctags.vim'
-Plug 'msanders/cocoa.vim'
-Plug 'eraserhd/vim-ios'
-Plug 'haifengkao/objc_matchbracket'
 Plug 'mhinz/vim-startify'
 Plug 'severin-lemaignan/vim-minimap'
-" Plug 'joonty/vdebug'
+Plug 'joonty/vdebug'
 Plug 'tpope/vim-sensible'
 
 " tComment cool
@@ -37,7 +41,7 @@ Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-vividchalk'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+" Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 " On-demand loading
 Plug 'scrooloose/nerdtree'
@@ -48,7 +52,7 @@ Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
 Plug 'junegunn/vim-github-dashboard'
 
 " Code completion
-Plug 'Shougo/deoplete.nvim'
+" Plug 'Shougo/deoplete.nvim'
 
 " Neomake
 Plug 'benekastah/neomake'
@@ -63,14 +67,13 @@ Plug 'rking/ag.vim'  " ag support for searching file
 Plug 'tpope/vim-surround'
 Plug 'qstrahl/vim-matchmaker'   " Highlight the term under the cursor
 Plug 'Chiel92/vim-autoformat'  " Auto-format code using existing formatters
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
+"Plug 'vim-ruby/vim-ruby'
+"Plug 'tpope/vim-rails'
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
 Plug 'Shougo/neocomplete.vim'
-Plug 'fatih/vim-go'
 " Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'garyburd/go-explorer'
@@ -78,13 +81,22 @@ Plug 'wikitopian/hardmode'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
+Plug 'Shougo/vimproc.vim', {'do' : 'make -f make_unix.mak'}
+Plug 'Shougo/unite.vim'
+Plug 'm2mdas/phpcomplete-extended'
+" Plug 'shawncplus/phpcomplete.vim'
+" Plug 'sebastiankessler/phpcomplete.vim'
+Plug 'xolox/vim-easytags'
+
+
 call plug#end()
 
-let GoPath = '/usr/local/go'
+autocmd FileType php omnifunc=phpcomplete_extended#CompletePHP
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 set background=dark
 " colorscheme gruvbox
-colorscheme vividchalk
+" colorscheme vividchalk
 
 " airline config
 let g:airline_powerline_fonts = 1
@@ -218,21 +230,23 @@ let g:neomake_error_sign = {
 let g:neomake_open_list = 2
 
 " Ruby idention
-autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
-autocmd FileType ruby compiler ruby
+"autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+"autocmd FileType ruby compiler ruby
 
 " vim-ruby completions
 filetype plugin on
-autocmd BufNewFile,BufRead *.jbuilder set filetype=ruby
-autocmd BufNewFile,BufRead *.rabl     set filetype=ruby
-autocmd User Rails                    silent! Rlcd
-autocmd User Rails                    silent! Rvm
+"autocmd BufNewFile,BufRead *.jbuilder set filetype=ruby
+"autocmd BufNewFile,BufRead *.rabl     set filetype=ruby
+"autocmd User Rails                    silent! Rlcd
+"autocmd User Rails                    silent! Rvm
+"
+"autocmd BufEnter ~/AppCode/findr-ios/* :setlocal tags+=~/AppCode/findr-ios/tags
 
-autocmd BufEnter ~/AppCode/findr-ios/* :setlocal tags+=~/AppCode/findr-ios/tags
+autocmd Filetype php set tags=/home/dennis.huebner/public/moodle/php.tags
 
-if has("autocmd")
-  autocmd BufNewFile,BufRead *.h,*.m set tags+=~/Documents/global-objc-tags
-endif
+" if has("autocmd")
+  " autocmd BufNewFile,BufRead *.h,*.m set tags+=~/Documents/global-objc-tags
+" endif
 
 let g:tagbar_type_swift = {
   \ 'ctagstype': 'swift',
@@ -258,12 +272,13 @@ function! NumberToggle()
 endfunc
 call NumberToggle()
 
-nnoremap <C-n> :call NumberToggle()<cr>
+" nnoremap <C-n> :call NumberToggle()<cr>
 
 :au FocusLost * :set number
 :au FocusGained * :set relativenumber
 
 inoremap jj <Esc>:w<CR>
+noremap qq <Esc>:q!<CR>
 
 function! s:filter_header(lines) abort
     let longest_line   = max(map(copy(a:lines), 'len(v:val)'))
@@ -366,3 +381,13 @@ let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 autocmd Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
 autocmd FileType go let $GOPATH = "/Users/dennis/Projekte/go"
 autocmd FileType go let $PATH = "/Users/dennis/Projekte/go/bin".$PATH
+
+" Gist plugin
+
+let g:gist_post_private = 1
+
+let g:notes_directories = ['~/Library/Mobile Documents/com~apple~CloudDocs/Desktop']
+
+let g:phpcomplete_index_composer_command="composer"
+
+
