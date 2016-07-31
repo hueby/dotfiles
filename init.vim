@@ -1,11 +1,13 @@
 " classic
-sy on
+" sy on
 set nu
 set shell=zsh
 autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
 autocmd VimLeave * call system("tmux rename-window zsh")
 autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
 set title
+
+let os = substitute(system('uname'), "\n", "", "")
 
 :nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
@@ -81,7 +83,7 @@ Plug 'wikitopian/hardmode'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
-Plug 'Shougo/vimproc.vim', {'do' : 'make -f make_unix.mak'}
+Plug 'Shougo/vimproc.vim', {'do' : 'make -f make_mac.mak'}
 Plug 'Shougo/unite.vim'
 Plug 'm2mdas/phpcomplete-extended'
 " Plug 'shawncplus/phpcomplete.vim'
@@ -374,14 +376,12 @@ let g:syntastic_go_checkers = ['go', 'golint', 'errcheck']
 
 " Open go doc in vertical window, horizontal, or tab
 autocmd Filetype go nnoremap <leader>v :vsp <CR>:exe "GoDef" <CR>
-autocmd FileType go let $GOPATH = "/Users/dennis/Projekte/go"
-autocmd FileType go let $PATH = "/Users/dennis/Projekte/go/bin".$PATH
 
 " Gist plugin
 
 let g:gist_post_private = 1
 
-let g:notes_directories = ['~/Library/Mobile Documents/com~apple~CloudDocs/Desktop']
+let g:notes_directories = ['~/OneDrive/Shared\ Notes/']
 
 let g:phpcomplete_index_composer_command="composer"
 

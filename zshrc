@@ -1,17 +1,17 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/dennis/.oh-my-zsh
 export EDITOR='nvim'
-source ~/.bin/tmuxinator.zsh
+# source ~/.bin/tmuxinator.zsh
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="pygmalion"
 # ZSH_THEME="wedisagree"
-ZSH_THEME="crunch"
+# ZSH_THEME="crunch"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -54,7 +54,7 @@ ZSH_THEME="crunch"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gem osx lol nyan git brew rails ruby node npm tmux vi-mode)
+plugins=(gem osx thefuck lol nyan git brew rails ruby node npm tmux vi-mode)
 
 # User configuration
 
@@ -110,3 +110,6 @@ alias yolo="sudo"
 #zle -N zle-line-init
 #zle -N zle-keymap-select
 #export KEYTIMEOUT=1
+export PATH="/usr/local/sbin:$PATH"
+
+eval $(thefuck --alias)
