@@ -106,3 +106,5 @@ let g:ctrlp_custom_ignore = {
 " insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+let g:vimwiki_list = [{'path' : '$HOME/Dropbox/vimwiki'}]
