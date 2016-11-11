@@ -36,8 +36,6 @@ Plug 'tpope/vim-sensible'
 
 " tComment cool
 Plug 'vim-scripts/tComment'
-Plug 'myhere/vim-nodejs-complete'
-Plug 'moll/vim-node'
 Plug 'majutsushi/tagbar'
 Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-vividchalk'
@@ -74,21 +72,27 @@ Plug 'Chiel92/vim-autoformat'  " Auto-format code using existing formatters
 Plug 'vim-airline/vim-airline'
 Plug 'jeetsukumaran/vim-buffergator'
 Plug 'wakatime/vim-wakatime'
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer' }
+Plug 'Valloric/YouCompleteMe'
 Plug 'Shougo/neocomplete.vim'
 " Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'garyburd/go-explorer'
 Plug 'wikitopian/hardmode'
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
 
 Plug 'Shougo/vimproc.vim', {'do' : 'make -f make_mac.mak'}
 Plug 'Shougo/unite.vim'
-Plug 'm2mdas/phpcomplete-extended'
+" Plug 'm2mdas/phpcomplete-extended'
 " Plug 'shawncplus/phpcomplete.vim'
 " Plug 'sebastiankessler/phpcomplete.vim'
 Plug 'xolox/vim-easytags'
+
+" JavaScript
+Plug 'myhere/vim-nodejs-complete'
+Plug 'moll/vim-node'
+Plug 'ternjs/tern_for_vim'
+Plug 'pangloss/vim-javascript'
+Plug 'flowtype/vim-flow'
 
 
 call plug#end()
