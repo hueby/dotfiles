@@ -62,7 +62,9 @@ Plug 'vimwiki/vimwiki'
 
 Plug 'mattn/webapi-vim'
 Plug 'myusuf3/numbers.vim'
-
+Plug 'kien/tabman.vim'
+Plug 'mattn/calendar-vim'
+" Plug 'itchyny/calendar.vim'
 call plug#end()
 
 " Jump to the first placeholder by typing `<C-k>`.
@@ -108,3 +110,6 @@ autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 let g:vimwiki_list = [{'path' : '$HOME/Dropbox/vimwiki'}]
+
+let g:syntastic_javascript_checkers = ['eslint']
+
