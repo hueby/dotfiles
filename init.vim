@@ -1,5 +1,4 @@
-" classic
-sy on
+syntax on
 set nu
 set shell=zsh
 
@@ -11,6 +10,8 @@ let mapleader = ","
 " plug.vim
 call plug#begin('~/.nvim/plugged')
 
+Plug 'xolox/vim-notes'
+Plug 'xolox/vim-misc'
 Plug 'ervandew/supertab'
 Plug 'rking/ag.vim'
 Plug 'keith/swift.vim'
@@ -360,3 +361,5 @@ highlight LineNr ctermfg=none ctermbg=none
 
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+let g:notes_directories = ['~/OneDrive/Shared Notes']
