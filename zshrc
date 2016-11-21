@@ -1,17 +1,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/dennis/.oh-my-zsh
 export EDITOR='nvim'
-source ~/.bin/tmuxinator.zsh
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# source ~/.bin/tmuxinator.zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-#ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 #ZSH_THEME="pygmalion"
-# ZSH_THEME="wedisagree"
-ZSH_THEME="crunch"
+# ZSH_THEME="wedisagree" # ZSH_THEME="crunch"
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -20,7 +18,7 @@ ZSH_THEME="crunch"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
- DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -54,11 +52,11 @@ ZSH_THEME="crunch"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gem osx lol nyan git brew rails ruby node npm tmux vi-mode)
+plugins=(gem ember-cli osx thefuck lol nyan git brew rails ruby node npm tmux vi-mode docker vagrant)
 
 # User configuration
 
-export PATH="/usr/local/mysql/bin:/Users/dennis/.local/bin:/usr/local/texlive/2015/bin/x86_64-darwin:/Users/dennis/Projekte/go/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin:/usr/local/MacGPG2/bin:/Users/dennis/.rvm/bin"
+export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -73,8 +71,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# Compilation flags # export ARCHFLAGS="-arch x86_64"
 
 # ssh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
@@ -87,8 +84,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
-alias yolo="sudo"
+alias hustle="cd ~/moodles/newmoodle/moodle"
+# alias qutebrowser="/Applications/qutebrowser.app/Contents/MacOS/qutebrowser &"
+alias nw="/Applications/nwjs.app/Contents/MacOS/nwjs"
 
 #vi-like snippet
 
@@ -110,3 +108,10 @@ alias yolo="sudo"
 #zle -N zle-line-init
 #zle -N zle-keymap-select
 #export KEYTIMEOUT=1
+export PATH="/usr/local/sbin:$PATH"
+eval $(thefuck --alias)
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PATH="$PATH:/usr/local/Cellar/openssl/1.0.2j/bin/openssl"
+
+if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
