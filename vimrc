@@ -10,7 +10,9 @@ let mapleader = ','
 set background=dark
 colorscheme solarized
 
-set tags=/Users/dennis/moodles/newmoodle/moodle/tags
+set tags=tags;
+
+" setlocal omnifunc=phpcomplete#CompletePHP
 
 call plug#begin($HOME.'/.vim/plugged') 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -166,6 +168,7 @@ let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 let g:ycm_use_ultisnips_completer = 1
+let g:ycm_min_num_of_chars_for_completion = 3
 
 " For YouCompleteMe messes
 set shortmess+=c
