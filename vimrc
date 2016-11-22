@@ -82,6 +82,7 @@ Plug 'mileszs/ack.vim'
 Plug 'xolox/vim-session' "For sessions
 Plug 'xolox/vim-misc' "Plugin
 Plug 'tpope/vim-fugitive' "Plugin
+Plug 'szw/vim-g' "Plugin Google inside vim
 
 call plug#end()
 "set rtp+=/usr/local/bin/fzf
@@ -177,3 +178,17 @@ au Syntax * RainbowParenthesesLoadBraces
 set so=0
 let g:UltiSnipsSnippetsDir=$HOME."/.vim/Ultisnips"
 " let g:UltiSnipsSnippetsDirectories=["Ultisnips"]
+
+" vimsession config
+
+let g:session_autoload = "no"
+let g:session_autosave = "no"
+nnoremap <leader>so :OpenSession
+nnoremap <leader>ss :SaveSession
+
+" EasyAlign config
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
