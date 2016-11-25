@@ -11,6 +11,7 @@ let mapleader = ','
 set background=dark
 set completeopt+=preview
 set wildmenu
+set clipboard=unnamed
 colorscheme solarized
 
 set tags=tags;
@@ -239,6 +240,3 @@ let g:vdebug_options= {
       \    "marker_closed_tree" : '▸',
       \    "marker_open_tree" : '▾'
       \}
-
-set clipboard=unnamed
-
