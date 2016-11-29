@@ -19,85 +19,82 @@ set tags=tags;
 " setlocal omnifunc=phpcomplete#CompletePHP
 
 call plug#begin($HOME.'/.vim/plugged') 
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-Plug 'junegunn/vim-easy-align'
-
-" Any valid git URL is allowed
-Plug 'joonty/vdebug' "Plugin
-Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-" Group dependencies, vim-snippets depends on ultisnips
-Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
-" On-demand loading
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" Using a non-master branch
-" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
-" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go'
-
-" Plugin options
-Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-
-Plug 'scrooloose/syntastic'
-
-Plug 'Raimondi/delimitMate'
-Plug 'kien/rainbow_parentheses.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'mattn/gist-vim'
-Plug 'vim-scripts/tComment'
-Plug 'tpope/vim-surround'
-Plug 'wakatime/vim-wakatime'
-Plug 'ternjs/tern_for_vim'
-" Plug 'vim-scripts/ag.vim'
-
-" Plug 'shawncplus/phpcomplete.vim'
-Plug 'majutsushi/tagbar'
-
-" Plug 'wesQ3/vim-windowswap'
-Plug 'digitaltoad/vim-pug'
-" Plug 'maksimr/vim-jsbeautify'
-Plug 'vimwiki/vimwiki'
-
-Plug 'mattn/webapi-vim'
-Plug 'myusuf3/numbers.vim'
-" Plug 'kien/tabman.vim'
-Plug 'mattn/calendar-vim'
-Plug 'wikitopian/hardmode'
-Plug 'terryma/vim-multiple-cursors'
-" Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-" Plug 'itchyny/calendar.vim'
-" Plug 'jeetsukumaran/vim-buffergator'
-" Plug 'severin-lemaignan/vim-minimap'
-Plug 'bling/vim-bufferline'
-" Plug 'troydm/easybuffer.vim'
- Plug 'ap/vim-buftabline'
-" Plug 'corntrace/bufexplorer'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'airblade/vim-gitgutter'
-Plug 'mileszs/ack.vim'
-Plug 'xolox/vim-session' "For sessions
-Plug 'xolox/vim-misc' "Plugin
-Plug 'tpope/vim-fugitive' "Plugin
-Plug 'szw/vim-g' "Plugin Google inside vim
-
+  " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+  Plug 'junegunn/vim-easy-align'
+  
+  " Any valid git URL is allowed
+  Plug 'joonty/vdebug' "Plugin
+  Plug 'https://github.com/junegunn/vim-github-dashboard.git'
+  
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  " Group dependencies, vim-snippets depends on ultisnips
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+  
+  " On-demand loading
+  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+  " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+  
+  " Using a non-master branch
+  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+  
+  " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+  Plug 'fatih/vim-go'
+  
+  " Plugin options
+  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+  
+  " Plugin outside ~/.vim/plugged with post-update hook
+  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf.vim'
+  
+  Plug 'scrooloose/syntastic'
+  
+  Plug 'Raimondi/delimitMate'
+  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'mattn/gist-vim'
+  Plug 'vim-scripts/tComment'
+  Plug 'tpope/vim-surround'
+  Plug 'wakatime/vim-wakatime'
+  Plug 'ternjs/tern_for_vim'
+  " Plug 'vim-scripts/ag.vim'
+  
+  " Plug 'shawncplus/phpcomplete.vim'
+  Plug 'majutsushi/tagbar'
+  
+  " Plug 'wesQ3/vim-windowswap'
+  Plug 'digitaltoad/vim-pug'
+  " Plug 'maksimr/vim-jsbeautify'
+  Plug 'vimwiki/vimwiki'
+  
+  Plug 'mattn/webapi-vim'
+  Plug 'myusuf3/numbers.vim'
+  " Plug 'kien/tabman.vim'
+  Plug 'mattn/calendar-vim'
+  Plug 'wikitopian/hardmode'
+  Plug 'terryma/vim-multiple-cursors'
+  " Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+  " Plug 'itchyny/calendar.vim'
+  " Plug 'jeetsukumaran/vim-buffergator'
+  " Plug 'severin-lemaignan/vim-minimap'
+  Plug 'bling/vim-bufferline'
+  " Plug 'troydm/easybuffer.vim'
+   Plug 'ap/vim-buftabline'
+  " Plug 'corntrace/bufexplorer'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'airblade/vim-gitgutter'
+  Plug 'mileszs/ack.vim'
+  Plug 'xolox/vim-session' "For sessions
+  Plug 'xolox/vim-misc' "Plugin
+  Plug 'tpope/vim-fugitive' "Plugin
+  Plug 'szw/vim-g' "Plugin Google inside vim
+  Plug 'floobits/floobits-neovim'
 call plug#end()
-"set rtp+=/usr/local/bin/fzf
+
+
 filetype plugin indent on
 
-" Ack uses Ag
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
 " Ultisnips
@@ -108,14 +105,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 inoremap jj <Esc>:w<CR>
 noremap qq <Esc>:q!<CR>
-
-" Use neocomplete.
-" let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-" let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-" let g:neocomplete#sources#syntax#min_keyword_length = 3
-" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 
 let g:github_dashboard = { 'username':'hueby', 'password': $GITHUB_TOKEN }
 
@@ -145,7 +134,7 @@ set whichwrap+=<,>,h,l,[,]
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(exe|so|dll)$'
   \ }
 
 " If you prefer the Omni-Completion tip window to close when a selection is
@@ -240,3 +229,10 @@ let g:vdebug_options= {
       \    "marker_closed_tree" : '▸',
       \    "marker_open_tree" : '▾'
       \}
+
+nnoremap <leader>y :find<space>
+
+set foldmethod=indent
+
+set cursorline
+nnoremap <leader>d :echo system("date")<CR>
