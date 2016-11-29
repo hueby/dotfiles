@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/dennis/.oh-my-zsh
+export ZSH=/Users/Dennis/.oh-my-zsh
 export EDITOR='vim'
 # source ~/.bin/tmuxinator.zsh
 
@@ -57,7 +57,7 @@ plugins=(gem ember-cli osx thefuck lol nyan git brew rails ruby node npm tmux vi
 
 # User configuration
 
-export PATH="$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh

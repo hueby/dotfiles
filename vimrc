@@ -16,7 +16,7 @@ colorscheme solarized
 
 set tags=tags;
 
-" setlocal omnifunc=phpcomplete#CompletePHP
+set omnifunc=phpcomplete#CompletePHP
 
 call plug#begin($HOME.'/.vim/plugged') 
   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -59,7 +59,7 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'ternjs/tern_for_vim'
   " Plug 'vim-scripts/ag.vim'
   
-  " Plug 'shawncplus/phpcomplete.vim'
+  Plug 'shawncplus/phpcomplete.vim'
   Plug 'majutsushi/tagbar'
   
   " Plug 'wesQ3/vim-windowswap'
@@ -75,11 +75,11 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'terryma/vim-multiple-cursors'
   " Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
   " Plug 'itchyny/calendar.vim'
-  " Plug 'jeetsukumaran/vim-buffergator'
-  " Plug 'severin-lemaignan/vim-minimap'
-  Plug 'bling/vim-bufferline'
+  Plug 'jeetsukumaran/vim-buffergator'
+  " " Plug 'severin-lemaignan/vim-minimap'
+  " Plug 'bling/vim-bufferline'
   " Plug 'troydm/easybuffer.vim'
-   Plug 'ap/vim-buftabline'
+   " Plug 'ap/vim-buftabline'
   " Plug 'corntrace/bufexplorer'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
@@ -150,10 +150,13 @@ let g:syntastic_javascript_checkers = ['eslint']
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
 
-nnoremap <leader>b <Esc>:CtrlPBuffer<CR>
+nnoremap <C-b> :CtrlPBuffer<CR>
 nnoremap <leader>f <Esc>:bprev<CR>
 nnoremap <leader>g <Esc>:bnext<CR>
 nnoremap <leader>c <Esc>:bdelete<CR>
+
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
 
 nnoremap <F8> :TagbarToggle<CR>
 set laststatus=2
@@ -213,7 +216,6 @@ nnoremap <C-H> <C-W><C-H>
 set splitbelow
 set splitright
 
-
 let g:vdebug_options= {
       \    "port" : 9134,
       \    "server" : '',
@@ -236,3 +238,12 @@ set foldmethod=indent
 
 set cursorline
 nnoremap <leader>d :echo system("date")<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+"Buffergator
+  " Use the right side of the screen
+  let g:buffergator_viewport_split_policy = 'R'
+  " View the entire list of buffers open
+  nmap <leader>bl :BuffergatorOpen<cr>
