@@ -17,6 +17,7 @@ colorscheme solarized
 set tags=tags;
 
 set omnifunc=phpcomplete#CompletePHP
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 call plug#begin($HOME.'/.vim/plugged') 
   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -90,6 +91,12 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'tpope/vim-fugitive' "Plugin
   Plug 'szw/vim-g' "Plugin Google inside vim
   Plug 'floobits/floobits-neovim'
+  
+  Plug 'elzr/vim-json'
+  Plug 'othree/jspc.vim'
+  Plug 'moll/vim-node'
+  Plug 'maksimr/vim-jsbeautify' "Plugin
+  Plug 'Shutnik/jshint2.vim' "Plugin
 call plug#end()
 
 
@@ -217,7 +224,7 @@ set splitbelow
 set splitright
 
 let g:vdebug_options= {
-      \    "port" : 9134,
+      \    "port" : 9135,
       \    "server" : '',
       \    "timeout" : 20,
       \    "on_close" : 'detach',
@@ -232,6 +239,7 @@ let g:vdebug_options= {
       \    "marker_open_tree" : '▾'
       \}
 
+set wildignore+=**/node_modules/**
 nnoremap <leader>y :find<space>
 
 set foldmethod=indent
@@ -247,3 +255,7 @@ let g:airline#extensions#tabline#fnamemod = ':t'
   let g:buffergator_viewport_split_policy = 'R'
   " View the entire list of buffers open
   nmap <leader>bl :BuffergatorOpen<cr>
+
+" JSHint
+	let jshint2_save = 0
+	let jshint2_load = 0
