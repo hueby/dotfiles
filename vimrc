@@ -50,7 +50,7 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'scrooloose/syntastic'
   
   Plug 'Raimondi/delimitMate'
-  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'eapache/rainbow_parentheses.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'mattn/gist-vim'
   Plug 'vim-scripts/tComment'
@@ -90,6 +90,8 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'tpope/vim-fugitive' "Plugin
   Plug 'szw/vim-g' "Plugin Google inside vim
   Plug 'floobits/floobits-neovim'
+  Plug 'malithsen/trello-vim' "Plugin
+  Plug 'suan/vim-instant-markdown' "Plugin
 call plug#end()
 
 
@@ -247,3 +249,4 @@ let g:airline#extensions#tabline#fnamemod = ':t'
   let g:buffergator_viewport_split_policy = 'R'
   " View the entire list of buffers open
   nmap <leader>bl :BuffergatorOpen<cr>
+
