@@ -51,7 +51,7 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'scrooloose/syntastic'
   
   Plug 'Raimondi/delimitMate'
-  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'eapache/rainbow_parentheses.vim'
   Plug 'ctrlpvim/ctrlp.vim'
   Plug 'mattn/gist-vim'
   Plug 'vim-scripts/tComment'
@@ -97,6 +97,8 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'moll/vim-node'
   Plug 'maksimr/vim-jsbeautify' "Plugin
   Plug 'Shutnik/jshint2.vim' "Plugin
+  Plug 'malithsen/trello-vim' "Plugin
+  Plug 'suan/vim-instant-markdown' "Plugin
 call plug#end()
 
 
@@ -224,7 +226,7 @@ set splitbelow
 set splitright
 
 let g:vdebug_options= {
-      \    "port" : 9135,
+      \    "port" : 9134,
       \    "server" : '',
       \    "timeout" : 20,
       \    "on_close" : 'detach',
