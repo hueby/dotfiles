@@ -24,10 +24,10 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'junegunn/vim-easy-align'
   
   " Any valid git URL is allowed
-  Plug 'joonty/vdebug' "Plugin
+  " Plug 'joonty/vdebug' "Plugin
   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
   
-  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   " Group dependencies, vim-snippets depends on ultisnips
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   
@@ -99,6 +99,8 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'Shutnik/jshint2.vim' "Plugin
   Plug 'malithsen/trello-vim' "Plugin
   Plug 'suan/vim-instant-markdown' "Plugin
+  Plug 'vim-pandoc/vim-pandoc'
+  Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
 call plug#end()
 
 
