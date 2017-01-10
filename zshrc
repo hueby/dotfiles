@@ -1,6 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Dennis/.oh-my-zsh
-export EDITOR='vim'
+export EDITOR=vim
 # source ~/.bin/tmuxinator.zsh
 
 # Set name of the theme to load.
