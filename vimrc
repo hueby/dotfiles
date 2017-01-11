@@ -1,5 +1,6 @@
 set nu
 sy on
+set autoindent
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -8,15 +9,13 @@ set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
 set path+=**
 
 let mapleader = ','
-set background=dark
 set completeopt+=preview
 set wildmenu
 set clipboard=unnamed
-colorscheme solarized
 
 set tags=tags;
 
-set omnifunc=phpcomplete#CompletePHP
+" set omnifunc=phpcomplete#CompletePHP
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
 call plug#begin($HOME.'/.vim/plugged') 
@@ -29,11 +28,11 @@ call plug#begin($HOME.'/.vim/plugged')
   
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   " Group dependencies, vim-snippets depends on ultisnips
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   
   " On-demand loading
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  " Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
   
   " Using a non-master branch
   " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
@@ -99,10 +98,33 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'Shutnik/jshint2.vim' "Plugin
   Plug 'malithsen/trello-vim' "Plugin
   Plug 'suan/vim-instant-markdown' "Plugin
-  Plug 'vim-pandoc/vim-pandoc'
-  Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
+  Plug 'othree/xml.vim' "Plugin
+  Plug 'Ron89/thesaurus_query.vim'
+  Plug 'dsawardekar/portkey' "Plugin
+  Plug 'mustache/vim-mustache-handlebars' "Plugin
+  " Plug 'dsawardekar/ember.vim' "Plugin
+  Plug 'junegunn/goyo.vim' "Plugin
+  Plug 'junegunn/limelight.vim' "Plugin
+  Plug 'tpope/vim-unimpaired' "Plugin
+  Plug 'tpope/vim-heroku' "Plugin
+  Plug 'nelstrom/vim-visual-star-search' "Plugin
+  Plug 'nelstrom/vim-markdown-folding'
+  Plug 'vim-pandoc/vim-pandoc' "Plugin
+  " Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
 call plug#end()
 
+" Jump to end of a fold GG
+nmap z] zo]z
+nmap z[ zo[z
+nnoremap <Space> za
+set nobackup
+set nowritebackup
+set noswapfile
+set hlsearch
+
+let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree', 'goyo']
+let g:instant_markdown_autostart = 0
+noremap ,im :InstantMarkdownPreview<CR>
 
 filetype plugin indent on
 
@@ -249,6 +271,7 @@ nnoremap <leader>y :find<space>
 set foldmethod=indent
 
 set cursorline
+hi CursorLine term=bold cterm=bold ctermbg=000
 nnoremap <leader>d :echo system("date")<CR>
 
 let g:airline#extensions#tabline#enabled = 1
@@ -263,3 +286,21 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 " JSHint
 	let jshint2_save = 0
 	let jshint2_load = 0
+
+" Thesaurus
+set thesaurus=/Users/dennis/.vim/thesaurus/mthesaur.txt
+
+autocmd filetype crontab setlocal nobackup nowritebackup
+let g:pandoc#spell#enabled = 0
+
+" Limelight & Goyo
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_conceal_guifg = '#777777'
+
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+
+nnoremap <leader>bb :Pandoc beamer -o <C-R>=expand('%:r')<CR>.pdf<CR>
