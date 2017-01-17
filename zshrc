@@ -97,8 +97,7 @@ alias nw="/Applications/nwjs.app/Contents/MacOS/nwjs"
 #bindkey '^N' down-history
 #bindkey '^?' backward-delete-char
 #bindkey '^h' backward-delete-char
-#bindkey '^w' backward-kill-word
-#bindkey '^r' history-incremental-search-backward
+#bindkey '^w' backward-kill-word #bindkey '^r' history-incremental-search-backward
 #
 #function zle-line-init zle-keymap-select {
 #    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -113,6 +112,13 @@ export PATH="/usr/local/sbin:$PATH"
 eval $(thefuck --alias)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="$PATH:/usr/local/Cellar/openssl/1.0.2j/bin/openssl"
+export PATH="$PATH:/Users/dennis/.cargo/bin:/usr/local/Cellar/openssl/1.0.2j/bin/openssl"
 
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
+
+export OPENSSL_INCLUDE_DIR="$(brew --prefix openssl)/include"
+export OPENSSL_LIB_DIR="$(brew --prefix openssl)/lib"
+
+export PERL_LWP_SSL_VERIFY_HOSTNAME=0
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

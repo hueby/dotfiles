@@ -7,6 +7,7 @@ filetype off                  " required
 set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
 
 set path+=**
+set hidden
 
 let mapleader = ','
 set completeopt+=preview
@@ -14,9 +15,12 @@ set wildmenu
 set clipboard=unnamed
 
 set tags=tags;
-
+set foldmethod=indent
 " set omnifunc=phpcomplete#CompletePHP
+
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType rust let g:syntastic_rust_checkers = ['rustc']
+autocmd FileType rust set foldmethod=manual
 
 call plug#begin($HOME.'/.vim/plugged') 
   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -26,7 +30,7 @@ call plug#begin($HOME.'/.vim/plugged')
   " Plug 'joonty/vdebug' "Plugin
   Plug 'https://github.com/junegunn/vim-github-dashboard.git'
   
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
   " Group dependencies, vim-snippets depends on ultisnips
    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   
@@ -111,6 +115,9 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'nelstrom/vim-markdown-folding'
   Plug 'vim-pandoc/vim-pandoc' "Plugin
   " Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
+  Plug 'rust-lang/rust.vim' "Plugin
+  Plug 'timonv/vim-cargo' "Plugin
+  Plug 'racer-rust/vim-racer' " Rust autocompletion
 call plug#end()
 
 " Jump to end of a fold GG
@@ -178,7 +185,6 @@ autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 
 let g:vimwiki_list = [{'path' : '$HOME/Dropbox/vimwiki'}]
 
-let g:syntastic_javascript_checkers = ['eslint']
 
 " autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 nnoremap <leader>h <Esc>:call ToggleHardMode()<CR>
@@ -268,7 +274,6 @@ let g:vdebug_options= {
 set wildignore+=**/node_modules/**
 nnoremap <leader>y :find<space>
 
-set foldmethod=indent
 
 set cursorline
 hi CursorLine term=bold cterm=bold ctermbg=000
@@ -304,3 +309,7 @@ let g:limelight_conceal_guifg = '#777777'
 let g:limelight_default_coefficient = 0.7
 
 nnoremap <leader>bb :Pandoc beamer -o <C-R>=expand('%:r')<CR>.pdf<CR>
+
+let g:ycm_rust_src_path='/usr/local/rust/rustc-1.14.0/src'
+
+let g:rustfmt_autosave = 1
