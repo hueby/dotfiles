@@ -16,10 +16,8 @@ set clipboard=unnamed
 
 set tags=tags;
 set foldmethod=indent
-" set omnifunc=phpcomplete#CompletePHP
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType rust let g:syntastic_rust_checkers = ['rustc']
 autocmd FileType rust set foldmethod=manual
 
 call plug#begin($HOME.'/.vim/plugged') 
@@ -28,112 +26,106 @@ call plug#begin($HOME.'/.vim/plugged')
   
   " Any valid git URL is allowed
   " Plug 'joonty/vdebug' "Plugin
-  Plug 'https://github.com/junegunn/vim-github-dashboard.git'
   
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer' }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer', 'for': ['rust', 'javascript', 'swift'] }
   " Group dependencies, vim-snippets depends on ultisnips
    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   
   " On-demand loading
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-   Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+  Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
   
   " Using a non-master branch
   " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
   
   " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-  Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go', { 'for': 'go' }
   
   " Plugin options
-  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
+  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim', 'for': 'go' }
   
   " Plugin outside ~/.vim/plugged with post-update hook
-  Plug 'junegunn/fzf'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   
-  Plug 'scrooloose/syntastic'
-  
+  Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] }
+  Plug 'nathanaelkane/vim-indent-guides' "Plugin
   Plug 'Raimondi/delimitMate'
   Plug 'eapache/rainbow_parentheses.vim'
-  Plug 'ctrlpvim/ctrlp.vim'
+  Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'}
   Plug 'mattn/gist-vim'
   Plug 'vim-scripts/tComment'
   Plug 'tpope/vim-surround'
   Plug 'wakatime/vim-wakatime'
-  Plug 'ternjs/tern_for_vim'
-  " Plug 'vim-scripts/ag.vim'
+  Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+  Plug 'vim-scripts/ag.vim'
   
-  Plug 'shawncplus/phpcomplete.vim'
+  Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
   Plug 'majutsushi/tagbar'
   
-  " Plug 'wesQ3/vim-windowswap'
-  Plug 'digitaltoad/vim-pug'
-  " Plug 'maksimr/vim-jsbeautify'
+  Plug 'digitaltoad/vim-pug' , { 'for': ['pug', 'jade']}
   Plug 'vimwiki/vimwiki'
   
   Plug 'mattn/webapi-vim'
   Plug 'myusuf3/numbers.vim'
-  " Plug 'kien/tabman.vim'
-  Plug 'mattn/calendar-vim'
   Plug 'wikitopian/hardmode'
   Plug 'terryma/vim-multiple-cursors'
-  " Plug 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
-  " Plug 'itchyny/calendar.vim'
   Plug 'jeetsukumaran/vim-buffergator'
-  " " Plug 'severin-lemaignan/vim-minimap'
-  " Plug 'bling/vim-bufferline'
-  " Plug 'troydm/easybuffer.vim'
-   " Plug 'ap/vim-buftabline'
-  " Plug 'corntrace/bufexplorer'
   Plug 'vim-airline/vim-airline'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'airblade/vim-gitgutter'
+  Plug 'easymotion/vim-easymotion' "Plugin
   Plug 'mileszs/ack.vim'
   Plug 'xolox/vim-session' "For sessions
   Plug 'xolox/vim-misc' "Plugin
   Plug 'tpope/vim-fugitive' "Plugin
-  Plug 'szw/vim-g' "Plugin Google inside vim
-  Plug 'floobits/floobits-neovim'
   
-  Plug 'elzr/vim-json'
+  Plug 'elzr/vim-json', { 'for': 'json' }
   Plug 'othree/jspc.vim'
-  Plug 'moll/vim-node'
-  Plug 'maksimr/vim-jsbeautify' "Plugin
-  Plug 'Shutnik/jshint2.vim' "Plugin
+  Plug 'moll/vim-node', { 'for': ['json', 'javascript'] }
+  Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'} "Plugin
+  Plug 'Shutnik/jshint2.vim', { 'for': 'javascript'}"Plugin
   Plug 'malithsen/trello-vim' "Plugin
-  Plug 'suan/vim-instant-markdown' "Plugin
-  Plug 'othree/xml.vim' "Plugin
-  Plug 'Ron89/thesaurus_query.vim'
-  Plug 'dsawardekar/portkey' "Plugin
-  Plug 'mustache/vim-mustache-handlebars' "Plugin
+  Plug 'suan/vim-instant-markdown', { 'for': 'markdown'} "Plugin
+  Plug 'othree/xml.vim', { 'for': 'xml' } "Plugin
+  Plug 'Ron89/thesaurus_query.vim' , { 'for': 'markdown' }
+  Plug 'mustache/vim-mustache-handlebars' , { 'for': 'html' }
   " Plug 'dsawardekar/ember.vim' "Plugin
-  Plug 'junegunn/goyo.vim' "Plugin
-  Plug 'junegunn/limelight.vim' "Plugin
+  Plug 'junegunn/goyo.vim' , { 'for': 'markdown' }
+  Plug 'junegunn/limelight.vim' , { 'for': 'markdown' }"Plugin
   Plug 'tpope/vim-unimpaired' "Plugin
   Plug 'tpope/vim-heroku' "Plugin
   Plug 'nelstrom/vim-visual-star-search' "Plugin
   Plug 'nelstrom/vim-markdown-folding'
-  Plug 'vim-pandoc/vim-pandoc' "Plugin
+  Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' } "Plugin
   " Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
-  Plug 'rust-lang/rust.vim' "Plugin
-  Plug 'timonv/vim-cargo' "Plugin
-  Plug 'racer-rust/vim-racer' " Rust autocompletion
+  Plug 'jlevesy/rust.vim' , { 'for': 'rust' } "Plugin
+  " Plug 'jFransham/rust.vim' "Plugin
+  " Plug 'timonv/vim-cargo' "Plugin
+  Plug 'Nonius/cargo.vim' , { 'for': 'rust' }"Plugin
+  " Plug 'racer-rust/vim-racer' " Rust autocompletion
+  " Plug 'burnettk/vim-angular' "Plugin
+
+  Plug 'tpope/vim-dispatch' "Plugin
+  Plug 'neomake/neomake' "Plugin
+  Plug 'keith/investigate.vim' "Plugin
+
+  Plug 'dbakker/vim-lint' "Plugin
 call plug#end()
+
+set rtp+=~/.fzf
 
 " Jump to end of a fold GG
 nmap z] zo]z
 nmap z[ zo[z
 nnoremap <Space> za
-set nobackup
-set nowritebackup
-set noswapfile
+
 set hlsearch
 
 let g:numbers_exclude = ['tagbar', 'gundo', 'minibufexpl', 'nerdtree', 'goyo']
 let g:instant_markdown_autostart = 0
 noremap ,im :InstantMarkdownPreview<CR>
 
-filetype plugin indent on
 
 " Trigger configuration. Do not use <tab> if you use
 " https://github.com/Valloric/YouCompleteMe.
@@ -145,13 +137,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 inoremap jj <Esc>:w<CR>
 noremap qq <Esc>:q!<CR>
-
-let g:github_dashboard = { 'username':'hueby', 'password': $GITHUB_TOKEN }
-
-" Dashboard window position
-" " - Options: tab, top, bottom, above, below, left, right
-" " - Default: tab
-let g:github_dashboard['position'] = 'top'
 
 " Use spaces instead of tabs
 set expandtab
@@ -215,10 +200,8 @@ au Syntax * RainbowParenthesesLoadBraces
 
 set so=0
 let g:UltiSnipsSnippetsDir=$HOME."/.vim/Ultisnips"
-" let g:UltiSnipsSnippetsDirectories=["Ultisnips"]
 
 " vimsession config
-
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 nnoremap <leader>so :OpenSession
@@ -293,23 +276,42 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 	let jshint2_load = 0
 
 " Thesaurus
-set thesaurus=/Users/dennis/.vim/thesaurus/mthesaur.txt
 
 autocmd filetype crontab setlocal nobackup nowritebackup
-let g:pandoc#spell#enabled = 0
 
 " Limelight & Goyo
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
-let g:limelight_conceal_ctermfg = 240
-let g:limelight_conceal_guifg = '#777777'
+augroup filetype_markdown
+  set thesaurus=/Users/dennis/.vim/thesaurus/mthesaur.txt
+  let g:pandoc#spell#enabled = 0
+  autocmd! User GoyoEnter Limelight
+  autocmd! User GoyoLeave Limelight!
+  let g:limelight_conceal_ctermfg = 240
+  let g:limelight_conceal_guifg = '#777777'
+  " Default: 0.5
+  let g:limelight_default_coefficient = 0.7
+  nnoremap <leader>bb :Pandoc beamer --template=beamer.tex -o <C-R>=expand('%:r')<CR>.pdf<CR>
+augroup end
 
-
-" Default: 0.5
-let g:limelight_default_coefficient = 0.7
-
-nnoremap <leader>bb :Pandoc beamer -o <C-R>=expand('%:r')<CR>.pdf<CR>
-
-let g:ycm_rust_src_path='/usr/local/rust/rustc-1.14.0/src'
+let g:ycm_rust_src_path='/Users/dennis/git-repos/rust/src'
 
 let g:rustfmt_autosave = 1
+
+augroup filetype_rust
+  let g:syntastic_rust_checkers = ['cargo']
+  let g:syntastic_always_populate_loc_list = 1
+  let g:syntastic_auto_loc_list = 1
+  let g:syntastic_check_on_open = 1
+  let g:syntastic_check_on_wq = 0
+augroup end
+
+let g:neomake_serialize = 1
+let g:neomake_serialize_abort_on_error = 1
+let g:neomake_rust_cargo_maker = {
+  \ 'exe': 'cargo build',
+  \ 'args': '',
+  \ 'errorformat': '%f: line %l\, col %c\, %m',
+  \ }
+let g:neomake_rust_enabled_makers = ['cargo']
+
+nnoremap <leader>e :e $MYVIMRC<CR>
+nnoremap <leader>s :so $MYVIMRC<CR>
