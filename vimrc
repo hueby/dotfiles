@@ -1,5 +1,4 @@
 set nu
-sy on
 set autoindent
 
 set nocompatible              " be iMproved, required
@@ -9,16 +8,17 @@ set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
 set path+=**
 set hidden
 
-let mapleader = ','
+let mapleader=','
 set completeopt+=preview
 set wildmenu
+set wildmode=longest,list
+set wildignore+=tmp\*,*.swp,*.zip,*.exe,*\.settings\*,\.classpath,\.project,*.class,\.springBeans,bin\*,target\*,*.jar,*\.git\*
 set clipboard=unnamed
 
 set tags=tags;
-set foldmethod=indent
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType rust set foldmethod=manual
+autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 call plug#begin($HOME.'/.vim/plugged') 
   " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -27,7 +27,7 @@ call plug#begin($HOME.'/.vim/plugged')
   " Any valid git URL is allowed
   " Plug 'joonty/vdebug' "Plugin
   
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer', 'for': ['rust', 'javascript', 'swift'] }
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer', 'for': [ 'javascript', 'swift', 'rust'] }
   " Group dependencies, vim-snippets depends on ultisnips
    Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
   
@@ -42,13 +42,13 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'fatih/vim-go', { 'for': 'go' }
   
   " Plugin options
-  Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim', 'for': 'go' }
+  Plug 'nsf/gocode', { 'for': 'go' }
   
   " Plugin outside ~/.vim/plugged with post-update hook
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   
-  Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] }
+  Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] , 'on': 'Ycm'}
   Plug 'nathanaelkane/vim-indent-guides' "Plugin
   Plug 'Raimondi/delimitMate'
   Plug 'eapache/rainbow_parentheses.vim'
@@ -60,7 +60,7 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
   Plug 'vim-scripts/ag.vim'
   
-  Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+  " Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
   Plug 'majutsushi/tagbar'
   
   Plug 'digitaltoad/vim-pug' , { 'for': ['pug', 'jade']}
@@ -103,7 +103,6 @@ call plug#begin($HOME.'/.vim/plugged')
   " Plug 'jFransham/rust.vim' "Plugin
   " Plug 'timonv/vim-cargo' "Plugin
   Plug 'Nonius/cargo.vim' , { 'for': 'rust' }"Plugin
-  " Plug 'racer-rust/vim-racer' " Rust autocompletion
   " Plug 'burnettk/vim-angular' "Plugin
 
   Plug 'tpope/vim-dispatch' "Plugin
@@ -111,6 +110,14 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'keith/investigate.vim' "Plugin
 
   Plug 'dbakker/vim-lint' "Plugin
+  Plug 'phildawes/racer' "Plugin
+  Plug 'racer-rust/vim-racer' "Plugin
+
+  Plug 'vim-php/tagbar-phpctags.vim', {'for': 'php'} "Plugin
+	Plug 'm2mdas/phpcomplete-extended', {'for': 'php'} 
+	Plug 'Shougo/denite.nvim'
+  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
 call plug#end()
 
 set rtp+=~/.fzf
@@ -188,7 +195,7 @@ let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 let g:ycm_use_ultisnips_completer = 1
-let g:ycm_min_num_of_chars_for_completion = 3
+let g:ycm_min_num_of_chars_for_completion = 2
 
 " For YouCompleteMe messes
 set shortmess+=c
@@ -314,4 +321,24 @@ let g:neomake_rust_cargo_maker = {
 let g:neomake_rust_enabled_makers = ['cargo']
 
 nnoremap <leader>e :e $MYVIMRC<CR>
-nnoremap <leader>s :so $MYVIMRC<CR>
+nnoremap <leader>s :w<CR> :so $MYVIMRC<CR>
+nnoremap <leader>pi :w<CR> :so $MYVIMRC<CR> :PlugInstall<CR>
+nnoremap <leader>pu :w<CR> :so $MYVIMRC<CR> :PlugUpdate<CR>
+nnoremap <leader>pc :w<CR> :so $MYVIMRC<CR> :PlugClean<CR>
+
+highlight Pmenu ctermfg=15 ctermbg=0 guifg=#ffffff guibg=#000000
+
+" Folding
+set fdm=indent
+set foldlevelstart=20
+nnoremap <F5> zM
+
+" Syntax Highlighting
+nnoremap <leader>+ :sy on<CR>
+nnoremap <leader>- :sy off<CR>
+
+let g:phpcomplete_complete_for_unknown_classes = 1
+let g:phpcomplete_search_tags_for_variables = 1
+let g:phpcomplete_parse_docblock_comments = 1
+
+let g:phpcomplete_index_composer_command = "composer"
