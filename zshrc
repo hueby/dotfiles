@@ -122,3 +122,17 @@ export OPENSSL_LIB_DIR="$(brew --prefix openssl)/lib"
 export PERL_LWP_SSL_VERIFY_HOSTNAME=0
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source ~/.bin/tmuxinator.zsh
+
+source "${HOME}/.zgen/zgen.zsh"
+
+# if the init scipt doesn't exist
+if ! zgen saved; then
+
+  # specify plugins here
+  zgen load uvaes/fzf-marks
+
+  # generate the init script from plugins above
+  zgen save
+fi
+
