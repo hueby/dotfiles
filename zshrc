@@ -125,13 +125,17 @@ export RUST_SRC_PATH="$HOME/git-repos/rust/src"
 export PERL_LWP_SSL_VERIFY_HOSTNAME=0
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+source ~/.bin/tmuxinator.zsh
 
-agvim () {
-	CHOICE=$(ag --color $* | fzf -0 -1 --ansi)
-	if [ ! -z "$CHOICE" ]
-	then
-		vim $( echo "$CHOICE" | awk 'BEGIN { FS=":" } { printf "+%d %s\n", $2, $1 } ') +"LAg! '$*'" "+wincmd k"
-	fi
-}
+source "${HOME}/.zgen/zgen.zsh"
 
-export HOMEBREW_GITHUB_API_TOKEN="734819e007cd03aa865c64204bf029e66a717127"
+# if the init scipt doesn't exist
+if ! zgen saved; then
+
+  # specify plugins here
+  zgen load uvaes/fzf-marks
+
+  # generate the init script from plugins above
+  zgen save
+fi
+

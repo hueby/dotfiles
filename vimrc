@@ -1,9 +1,21 @@
 set nu
 set autoindent
 
+set guifont=Monaco:h14
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
-set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
+" set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set softtabstop=0
+set shiftwidth=4
+set tabstop=4
 
 set path+=**
 set hidden
@@ -11,7 +23,8 @@ set hidden
 let mapleader=','
 set completeopt+=preview
 set wildmenu
-set wildmode=longest,list
+set wildchar=<Tab>
+set wildmode=full
 set wildignore+=tmp\*,*.swp,*.zip,*.exe,*\.settings\*,\.classpath,\.project,*.class,\.springBeans,bin\*,target\*,*.jar,*\.git\*
 set clipboard=unnamed
 
@@ -21,102 +34,111 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
 
 call plug#begin($HOME.'/.vim/plugged') 
-  " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-  Plug 'junegunn/vim-easy-align'
-  
-  " Any valid git URL is allowed
-  " Plug 'joonty/vdebug' "Plugin
-  
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer', 'for': [ 'javascript', 'swift', 'rust'] }
-  " Group dependencies, vim-snippets depends on ultisnips
-   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-  
-  " On-demand loading
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-  Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-  
-  " Using a non-master branch
-  " Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-  
-  " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-  Plug 'fatih/vim-go', { 'for': 'go' }
-  
-  " Plugin options
-  Plug 'nsf/gocode', { 'for': 'go' }
-  
-  " Plugin outside ~/.vim/plugged with post-update hook
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  
-  Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] , 'on': 'Ycm'}
-  Plug 'nathanaelkane/vim-indent-guides' "Plugin
-  Plug 'Raimondi/delimitMate'
-  Plug 'eapache/rainbow_parentheses.vim'
-  Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'}
-  Plug 'mattn/gist-vim'
-  Plug 'vim-scripts/tComment'
-  Plug 'tpope/vim-surround'
-  Plug 'wakatime/vim-wakatime'
-  Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-  Plug 'vim-scripts/ag.vim'
-  
-  " Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
-  Plug 'majutsushi/tagbar'
-  
-  Plug 'digitaltoad/vim-pug' , { 'for': ['pug', 'jade']}
-  Plug 'vimwiki/vimwiki'
-  
-  Plug 'mattn/webapi-vim'
-  Plug 'myusuf3/numbers.vim'
-  Plug 'wikitopian/hardmode'
-  Plug 'terryma/vim-multiple-cursors'
-  Plug 'jeetsukumaran/vim-buffergator'
-  Plug 'vim-airline/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
-  Plug 'airblade/vim-gitgutter'
-  Plug 'easymotion/vim-easymotion' "Plugin
-  Plug 'mileszs/ack.vim'
-  Plug 'xolox/vim-session' "For sessions
-  Plug 'xolox/vim-misc' "Plugin
-  Plug 'tpope/vim-fugitive' "Plugin
-  
-  Plug 'elzr/vim-json', { 'for': 'json' }
-  Plug 'othree/jspc.vim'
-  Plug 'moll/vim-node', { 'for': ['json', 'javascript'] }
-  Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'} "Plugin
-  Plug 'Shutnik/jshint2.vim', { 'for': 'javascript'}"Plugin
-  Plug 'malithsen/trello-vim' "Plugin
-  Plug 'suan/vim-instant-markdown', { 'for': 'markdown'} "Plugin
-  Plug 'othree/xml.vim', { 'for': 'xml' } "Plugin
-  Plug 'Ron89/thesaurus_query.vim' , { 'for': 'markdown' }
-  Plug 'mustache/vim-mustache-handlebars' , { 'for': 'html' }
-  " Plug 'dsawardekar/ember.vim' "Plugin
-  Plug 'junegunn/goyo.vim' , { 'for': 'markdown' }
-  Plug 'junegunn/limelight.vim' , { 'for': 'markdown' }"Plugin
-  Plug 'tpope/vim-unimpaired' "Plugin
-  Plug 'tpope/vim-heroku' "Plugin
-  Plug 'nelstrom/vim-visual-star-search' "Plugin
-  Plug 'nelstrom/vim-markdown-folding'
-  Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' } "Plugin
-  " Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
-  Plug 'jlevesy/rust.vim' , { 'for': 'rust' } "Plugin
-  " Plug 'jFransham/rust.vim' "Plugin
-  " Plug 'timonv/vim-cargo' "Plugin
-  Plug 'Nonius/cargo.vim' , { 'for': 'rust' }"Plugin
-  " Plug 'burnettk/vim-angular' "Plugin
+" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+Plug 'junegunn/vim-easy-align'
 
-  Plug 'tpope/vim-dispatch' "Plugin
-  Plug 'neomake/neomake' "Plugin
-  Plug 'keith/investigate.vim' "Plugin
+" Any valid git URL is allowed
+" Plug 'joonty/vdebug' "Plugin
 
-  Plug 'dbakker/vim-lint' "Plugin
-  Plug 'phildawes/racer' "Plugin
-  Plug 'racer-rust/vim-racer' "Plugin
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --racer-completer', 'for': [ 'javascript', 'swift', 'rust'] }
+" Group dependencies, vim-snippets depends on ultisnips
+Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 
-  Plug 'vim-php/tagbar-phpctags.vim', {'for': 'php'} "Plugin
-	Plug 'm2mdas/phpcomplete-extended', {'for': 'php'} 
-	Plug 'Shougo/denite.nvim'
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+" On-demand loading
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
+
+" Using a non-master branch
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+" Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
+Plug 'fatih/vim-go', { 'for': 'go' }
+
+" Plugin options
+Plug 'nsf/gocode', { 'for': 'go' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] , 'on': 'Ycm'}
+Plug 'nathanaelkane/vim-indent-guides' "Plugin
+Plug 'Raimondi/delimitMate'
+Plug 'eapache/rainbow_parentheses.vim'
+Plug 'ctrlpvim/ctrlp.vim', {'on': 'CtrlP'}
+Plug 'mattn/gist-vim'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-surround'
+Plug 'wakatime/vim-wakatime'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+Plug 'vim-scripts/ag.vim'
+
+" Plug 'shawncplus/phpcomplete.vim', { 'for': 'php' }
+Plug 'majutsushi/tagbar'
+
+Plug 'digitaltoad/vim-pug' , { 'for': ['pug', 'jade']}
+Plug 'vimwiki/vimwiki'
+
+Plug 'mattn/webapi-vim'
+Plug 'myusuf3/numbers.vim'
+Plug 'wikitopian/hardmode'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jeetsukumaran/vim-buffergator'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+Plug 'airblade/vim-gitgutter'
+Plug 'easymotion/vim-easymotion' "Plugin
+Plug 'mileszs/ack.vim'
+Plug 'xolox/vim-session' "For sessions
+Plug 'xolox/vim-misc' "Plugin
+Plug 'tpope/vim-fugitive' "Plugin
+
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'othree/jspc.vim'
+Plug 'moll/vim-node', { 'for': ['json', 'javascript'] }
+Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'} "Plugin
+Plug 'Shutnik/jshint2.vim', { 'for': 'javascript'}"Plugin
+Plug 'malithsen/trello-vim' "Plugin
+Plug 'suan/vim-instant-markdown', { 'for': 'markdown'} "Plugin
+Plug 'othree/xml.vim', { 'for': 'xml' } "Plugin
+Plug 'Ron89/thesaurus_query.vim' , { 'for': 'markdown' }
+Plug 'mustache/vim-mustache-handlebars' , { 'for': 'html' }
+" Plug 'dsawardekar/ember.vim' "Plugin
+Plug 'junegunn/goyo.vim' , { 'for': 'markdown' }
+Plug 'junegunn/limelight.vim' , { 'for': 'markdown' }"Plugin
+Plug 'tpope/vim-unimpaired' "Plugin
+Plug 'tpope/vim-heroku' "Plugin
+Plug 'nelstrom/vim-visual-star-search' "Plugin
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'vim-pandoc/vim-pandoc' , { 'for': 'markdown' } "Plugin
+" Plug 'vim-pandoc/vim-pandoc-syntax' "Plugin
+Plug 'jlevesy/rust.vim' , { 'for': 'rust' } "Plugin
+" Plug 'jFransham/rust.vim' "Plugin
+" Plug 'timonv/vim-cargo' "Plugin
+Plug 'Nonius/cargo.vim' , { 'for': 'rust' }"Plugin
+" Plug 'burnettk/vim-angular' "Plugin
+
+Plug 'tpope/vim-dispatch' "Plugin
+Plug 'neomake/neomake' "Plugin
+Plug 'keith/investigate.vim' "Plugin
+
+Plug 'dbakker/vim-lint' "Plugin
+Plug 'phildawes/racer' "Plugin
+Plug 'racer-rust/vim-racer' "Plugin
+
+Plug 'vim-php/tagbar-phpctags.vim', {'for': 'php'} "Plugin
+Plug 'DanielSiepmann/phpstorm-stubs', {'for': 'php'}
+Plug 'Shougo/unite.vim'
+Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+Plug 'shawncplus/phpcomplete.vim', {'for': 'php'} 
+
+Plug 'Shougo/neocomplete.vim', {'for': 'php'} "Plugin
+Plug 'soulston/vim-listtrans' "Plugin
+Plug 'beanworks/vim-phpfmt', {'for': 'php'} "Plugin
+Plug '~/.vim/plugins/foldsearches.vim' "Plugin
+" Plug 'Rican7/php-doc-modded'
+Plug 'tobyS/vmustache'
+Plug 'tobyS/pdv'
 
 call plug#end()
 
@@ -145,15 +167,6 @@ let g:UltiSnipsEditSplit="vertical"
 inoremap jj <Esc>:w<CR>
 noremap qq <Esc>:q!<CR>
 
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=2
-set tabstop=2
 
 nmap <leader>7 :TComment<CR>
 :set mouse=a
@@ -165,9 +178,9 @@ set whichwrap+=<,>,h,l,[,]
 " noremap <C-n> <Esc>:NERDTreeToggle<CR>
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
-  \ 'file': '\v\.(exe|so|dll)$'
-  \ }
+            \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
+            \ 'file': '\v\.(exe|so|dll)$'
+            \ }
 
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving
@@ -191,7 +204,7 @@ nnoremap <C-l> :tabnext<CR>
 
 nnoremap <F8> :TagbarToggle<CR>
 set laststatus=2
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 let g:ycm_use_ultisnips_completer = 1
@@ -222,13 +235,13 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 if executable('ag')
-  " Use Ag over Grep
-  set grepprg=ag\ --nogroup\ --nocolor
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  " ag is fast enough that CtrlP doesn't need to cache
-  let g:ctrlp_use_caching = 0
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
 endif
 
 " bind K to grep word under cursor
@@ -246,20 +259,20 @@ set splitbelow
 set splitright
 
 let g:vdebug_options= {
-      \    "port" : 9134,
-      \    "server" : '',
-      \    "timeout" : 20,
-      \    "on_close" : 'detach',
-      \    "break_on_open" : 0,
-      \    "path_maps" : {},
-      \    "debug_window_level" : 0,
-      \    "debug_file_level" : 0,
-      \    "debug_file" : "",
-      \    "watch_window_style" : 'expanded',
-      \    "marker_default" : '⬦',
-      \    "marker_closed_tree" : '▸',
-      \    "marker_open_tree" : '▾'
-      \}
+            \    "port" : 9134,
+            \    "server" : '',
+            \    "timeout" : 20,
+            \    "on_close" : 'detach',
+            \    "break_on_open" : 0,
+            \    "path_maps" : {},
+            \    "debug_window_level" : 0,
+            \    "debug_file_level" : 0,
+            \    "debug_file" : "",
+            \    "watch_window_style" : 'expanded',
+            \    "marker_default" : '⬦',
+            \    "marker_closed_tree" : '▸',
+            \    "marker_open_tree" : '▾'
+            \}
 
 set wildignore+=**/node_modules/**
 nnoremap <leader>y :find<space>
@@ -273,14 +286,14 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
 "Buffergator
-  " Use the right side of the screen
-  let g:buffergator_viewport_split_policy = 'R'
-  " View the entire list of buffers open
-  nmap <leader>bl :BuffergatorOpen<cr>
+" Use the right side of the screen
+let g:buffergator_viewport_split_policy = 'R'
+" View the entire list of buffers open
+nmap <leader>bl :BuffergatorOpen<cr>
 
 " JSHint
-	let jshint2_save = 0
-	let jshint2_load = 0
+let jshint2_save = 0
+let jshint2_load = 0
 
 " Thesaurus
 
@@ -288,15 +301,15 @@ autocmd filetype crontab setlocal nobackup nowritebackup
 
 " Limelight & Goyo
 augroup filetype_markdown
-  set thesaurus=/Users/dennis/.vim/thesaurus/mthesaur.txt
-  let g:pandoc#spell#enabled = 0
-  autocmd! User GoyoEnter Limelight
-  autocmd! User GoyoLeave Limelight!
-  let g:limelight_conceal_ctermfg = 240
-  let g:limelight_conceal_guifg = '#777777'
-  " Default: 0.5
-  let g:limelight_default_coefficient = 0.7
-  nnoremap <leader>bb :Pandoc beamer --template=beamer.tex -o <C-R>=expand('%:r')<CR>.pdf<CR>
+    set thesaurus=/Users/dennis/.vim/thesaurus/mthesaur.txt
+    let g:pandoc#spell#enabled = 0
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+    let g:limelight_conceal_ctermfg = 240
+    let g:limelight_conceal_guifg = '#777777'
+    " Default: 0.5
+    let g:limelight_default_coefficient = 0.7
+    nnoremap <leader>bb :Pandoc beamer --template=beamer.tex -o <C-R>=expand('%:r')<CR>.pdf<CR>
 augroup end
 
 let g:ycm_rust_src_path='/Users/dennis/git-repos/rust/src'
@@ -304,20 +317,20 @@ let g:ycm_rust_src_path='/Users/dennis/git-repos/rust/src'
 let g:rustfmt_autosave = 1
 
 augroup filetype_rust
-  let g:syntastic_rust_checkers = ['cargo']
-  let g:syntastic_always_populate_loc_list = 1
-  let g:syntastic_auto_loc_list = 1
-  let g:syntastic_check_on_open = 1
-  let g:syntastic_check_on_wq = 0
+    let g:syntastic_rust_checkers = ['cargo']
+    let g:syntastic_always_populate_loc_list = 1
+    let g:syntastic_auto_loc_list = 1
+    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_wq = 0
 augroup end
 
 let g:neomake_serialize = 1
 let g:neomake_serialize_abort_on_error = 1
 let g:neomake_rust_cargo_maker = {
-  \ 'exe': 'cargo build',
-  \ 'args': '',
-  \ 'errorformat': '%f: line %l\, col %c\, %m',
-  \ }
+            \ 'exe': 'cargo build',
+            \ 'args': '',
+            \ 'errorformat': '%f: line %l\, col %c\, %m',
+            \ }
 let g:neomake_rust_enabled_makers = ['cargo']
 
 nnoremap <leader>e :e $MYVIMRC<CR>
@@ -342,3 +355,66 @@ let g:phpcomplete_search_tags_for_variables = 1
 let g:phpcomplete_parse_docblock_comments = 1
 
 let g:phpcomplete_index_composer_command = "composer"
+
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+nnoremap # :FZF<CR>
+
+if !exists('g:neocomplete#sources#omni#input_patterns')
+    let g:neocomplete#sources#omni#input_patterns = {}
+endif
+let g:neocomplete#sources#omni#input_patterns.php =
+            \ '[^. \t]->\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+
+highlight ColorColumn ctermbg=magenta
+call matchadd('ColorColumn', '\%81v', 100)
+
+exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+set list
+
+nmap ;l :call ListTrans_toggle_format()<CR>
+vmap ;l :call ListTrans_toggle_format('visual')<CR>
+
+sy off
+
+autocmd BufRead *.wiki :sy on
+
+" Edit highlighted folds
+highlight Folded ctermfg=cyan ctermbg=black
+
+" Toggle on off
+nmap <silent> <expr> zz FS_ToggleFoldAroundSearch({'context':1})
+
+" Show only sub defns (and maybe comments)...
+let perl_sub_pat = '^\s*\%(abstract\|function\|class\)\s\+\k\+'
+let vim_sub_pat  = '^\s*fu\%[nction!]\s\+\k\+'
+augroup FoldSub
+    autocmd!
+    autocmd BufEnter * nmap <silent> <expr>  zp  FS_FoldAroundTarget(perl_sub_pat,{'context':1})
+    autocmd BufEnter * nmap <silent> <expr>  za  FS_FoldAroundTarget(perl_sub_pat.'\zs\\|^\s*#.*',{'context':0, 'folds':'invisible'})
+    autocmd BufEnter *.vim,.vimrc nmap <silent> <expr>  zp  FS_FoldAroundTarget(vim_sub_pat,{'context':1})
+    autocmd BufEnter *.vim,.vimrc nmap <silent> <expr>  za  FS_FoldAroundTarget(vim_sub_pat.'\\|^\s*".*',{'context':0, 'folds':'invisible'})
+    autocmd BufEnter * nmap <silent> <expr>             zv  FS_FoldAroundTarget(vim_sub_pat.'\\|^\s*".*',{'context':0, 'folds':'invisible'})
+augroup END
+
+nnoremap <F1> :b 
+
+set statusline=
+set statusline +=%1*\ %n\ %*            "buffer number
+set statusline +=%5*%{&ff}%*            "file format
+set statusline +=%3*%y%*                "file type
+set statusline +=%4*\ %<%F%*            "full path
+set statusline +=%2*%m%*                "modified flag
+set statusline +=%1*%=%5l%*             "current line
+set statusline +=%2*/%L%*               "total lines
+
+set modelines=0
+
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
+nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
