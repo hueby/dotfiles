@@ -2,6 +2,7 @@
 export ZSH=/Users/Dennis/.oh-my-zsh
 export EDITOR=vim
 # source ~/.bin/tmuxinator.zsh
+fpath+=~/.zfunc
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -112,13 +113,25 @@ export PATH="/usr/local/sbin:$PATH"
 eval $(thefuck --alias)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="$PATH:/Users/dennis/.cargo/bin:/usr/local/Cellar/openssl/1.0.2j/bin/openssl"
+export GOPATH="~/Projekte/go"
+export PATH="$PATH:/Users/dennis/Projekte/go/bin:/Users/dennis/.cargo/bin:/usr/local/Cellar/openssl/1.0.2j/bin/openssl"
 
 if which swiftenv > /dev/null; then eval "$(swiftenv init -)"; fi
 
 export OPENSSL_INCLUDE_DIR="$(brew --prefix openssl)/include"
 export OPENSSL_LIB_DIR="$(brew --prefix openssl)/lib"
+export RUST_SRC_PATH="$HOME/git-repos/rust/src"
 
 export PERL_LWP_SSL_VERIFY_HOSTNAME=0
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+agvim () {
+	CHOICE=$(ag --color $* | fzf -0 -1 --ansi)
+	if [ ! -z "$CHOICE" ]
+	then
+		vim $( echo "$CHOICE" | awk 'BEGIN { FS=":" } { printf "+%d %s\n", $2, $1 } ') +"LAg! '$*'" "+wincmd k"
+	fi
+}
+
+export HOMEBREW_GITHUB_API_TOKEN="734819e007cd03aa865c64204bf029e66a717127"
