@@ -63,6 +63,7 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'ternjs/tern_for_vim'
   " Plug 'vim-scripts/ag.vim'
   
+  Plug 'arnaud-lb/vim-php-namespace' "Plugin
   Plug 'shawncplus/phpcomplete.vim'
   Plug 'majutsushi/tagbar'
   
@@ -118,6 +119,15 @@ call plug#begin($HOME.'/.vim/plugged')
   Plug 'rust-lang/rust.vim' "Plugin
   Plug 'timonv/vim-cargo' "Plugin
   Plug 'racer-rust/vim-racer' " Rust autocompletion
+  Plug 'leafgarland/typescript-vim' "Plugin
+  Plug 'd11wtq/ctrlp_bdelete.vim' "Plugin
+
+  Plug 'Shougo/vimproc.vim', {'do': 'make'} "Plugin
+  Plug 'Quramy/tsuquyomi' "Plugin
+  Plug 'chrisbra/Colorizer' "Plugin
+  Plug 'malithsen/trello-vim' "Plugin
+  Plug 'joonty/vim-phpqa' "Plugin
+
 call plug#end()
 
 " Jump to end of a fold GG
@@ -170,7 +180,7 @@ set backspace=2 " make backspace work like most other apps
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l,[,]
 
-" noremap <C-n> <Esc>:NERDTreeToggle<CR>
+noremap <leader>n <Esc>:NERDTreeToggle<CR>
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)|node_modules$',
@@ -313,3 +323,45 @@ nnoremap <leader>bb :Pandoc beamer -o <C-R>=expand('%:r')<CR>.pdf<CR>
 let g:ycm_rust_src_path='/usr/local/rust/rustc-1.14.0/src'
 
 let g:rustfmt_autosave = 1
+
+call ctrlp_bdelete#init()
+
+
+" " Syntastic
+" let g:syntastic_aggregate_errors=1
+" let g:syntastic_sort_aggregate_errors=1
+" let g:syntastic_id_checkers=1
+" let g:syntastic_cursor_column=1
+" let g:syntastic_enable_signs=1
+" let g:syntastic_always_populate_loc_list=1
+" let g:syntastic_enable_highlighting=1
+" let g:syntastic_error_symbol='x'
+" let g:syntastic_warning_symbol='!'
+" let g:syntastic_mode='active'
+" let g:syntastic_php_checkers=1
+" let g:syntastic_check_on_open=1
+" let g:syntastic_check_on_wq=1
+" let g:syntastic_auto_loc_list=1
+" let g:syntastic_mode_map={
+" 			\'mode': 'active',
+" 			\'active_filetypes': ['php'],
+" 			\'passive_filetypes': []
+" 			\}
+" unlet g:syntastic_php_checkers
+" let g:syntastic_php_checkers = ["php", "phpcs", "phpmd"]
+" let g:syntastic_php_phpcs_args='--report=csv --standard=my_standard'
+"
+" augroup AutoSyntastic
+" 	autocmd!
+" 	autocmd BufWritePost *.php call s:syntastic()
+" 	autocmd BufWritePost *.module call s:syntastic()
+" 	autocmd BufWritePost *.install call s:syntastic()
+" 	autocmd BufWritePost *.profile call s:syntastic()
+" 	autocmd BufWritePost *.inc call s:syntastic()
+" 	autocmd BufWritePost *.test call s:syntastic()
+" augroup END
+" function! s:syntastic()
+" 	SyntasticCheck
+" endfunction
+
+let g:phpqa_codesniffer_args = "--standard=/Users/Dennis/moodles/current/moodle/local/codechecker/moodle/ruleset.xml"
