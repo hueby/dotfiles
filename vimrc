@@ -31,7 +31,7 @@ set tags=tags;
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
-autocmd! BufWritePost,BufEnter * Neomake
+autocmd! BufWritePost,BufEnter *.php Neomake
 
 call plug#begin($HOME.'/.vim/plugged') 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -337,12 +337,8 @@ let g:neomake_php_phpcs_maker = {
             \ 'args':['--report=csv', '--standard=~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml'],
             \ 'errorformat':'%-GFile\,Line\,Column\,Type\,Message\,Source\,Severity%.%#,"%f"\,%l\,%c\,%t%*[a-zA-Z]\,"%m"\,%*[a-zA-Z0-9_.-]\,%*[0-9]%.%#',
             \ }
-let g:neomake_php_phpmd_maker = {
-            \ 'exe': 'phpmd',
-            \ 'args':['%:p', 'text', '--standard=~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml'],
-            \ 'errorformat':'%E%f:%l%\s%m',
-            \ }
-let g:neomake_php_enabled_makers = ['phpcs', 'phpmd']
+
+let g:neomake_php_enabled_makers = ['phpcs']
 
 nnoremap <leader>e :e $MYVIMRC<CR>
 nnoremap <leader>s :w<CR> :so $MYVIMRC<CR>
@@ -433,3 +429,13 @@ nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
 set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18
 
 let g:phpfmt_standard = "~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml"
+
+let g:neomake_open_list = 2
+
+" neomake
+nmap lo :lopen<CR>      " open location window
+nmap lc :lclose<CR>     " close location window
+nmap ec :ll<CR>         " go to current error/warning
+nmap en :lnext<CR>      " next error/warning
+nmap ep :lprev<CR>      " previous error/warning
+
