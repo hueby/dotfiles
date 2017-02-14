@@ -1,7 +1,6 @@
 set nu
 set autoindent
 
-set guifont=Monaco:h14
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -32,6 +31,7 @@ set tags=tags;
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
+autocmd! BufWritePost,BufEnter * Neomake
 
 call plug#begin($HOME.'/.vim/plugged') 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -204,7 +204,6 @@ nnoremap <C-l> :tabnext<CR>
 
 nnoremap <F8> :TagbarToggle<CR>
 set laststatus=2
-" let g:airline_powerline_fonts = 1
 let g:bufferline_echo = 0
 
 let g:ycm_use_ultisnips_completer = 1
@@ -333,6 +332,18 @@ let g:neomake_rust_cargo_maker = {
             \ }
 let g:neomake_rust_enabled_makers = ['cargo']
 
+let g:neomake_php_phpcs_maker = {
+            \ 'exe': 'phpcs',
+            \ 'args':['--report=csv', '--standard=~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml'],
+            \ 'errorformat':'%-GFile\,Line\,Column\,Type\,Message\,Source\,Severity%.%#,"%f"\,%l\,%c\,%t%*[a-zA-Z]\,"%m"\,%*[a-zA-Z0-9_.-]\,%*[0-9]%.%#',
+            \ }
+let g:neomake_php_phpmd_maker = {
+            \ 'exe': 'phpmd',
+            \ 'args':['%:p', 'text', '--standard=~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml'],
+            \ 'errorformat':'%E%f:%l%\s%m',
+            \ }
+let g:neomake_php_enabled_makers = ['phpcs', 'phpmd']
+
 nnoremap <leader>e :e $MYVIMRC<CR>
 nnoremap <leader>s :w<CR> :so $MYVIMRC<CR>
 nnoremap <leader>pi :w<CR> :so $MYVIMRC<CR> :PlugInstall<CR>
@@ -418,3 +429,7 @@ autocmd GUIEnter * set visualbell t_vb=
 
 let g:pdv_template_dir = $HOME . "/.vim/plugged/pdv/templates_snip"
 nnoremap <C-p> :call pdv#DocumentWithSnip()<CR>
+
+set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18
+
+let g:phpfmt_standard = "~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml"
