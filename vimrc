@@ -25,12 +25,11 @@ set wildmenu
 set wildchar=<Tab>
 set wildmode=full
 set wildignore+=tmp\*,*.swp,*.zip,*.exe,*\.settings\*,\.classpath,\.project,*.class,\.springBeans,bin\*,target\*,*.jar,*\.git\*
-set clipboard=unnamed
 
 set tags=tags;
 
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
+" autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
 autocmd! BufWritePost,BufEnter *.php Neomake
 
 call plug#begin($HOME.'/.vim/plugged') 
@@ -126,19 +125,22 @@ Plug 'dbakker/vim-lint' "Plugin
 Plug 'phildawes/racer' "Plugin
 Plug 'racer-rust/vim-racer' "Plugin
 
-Plug 'vim-php/tagbar-phpctags.vim', {'for': 'php'} "Plugin
-Plug 'DanielSiepmann/phpstorm-stubs', {'for': 'php'}
+" Plug 'vim-php/tagbar-phpctags.vim', {'for': 'php'} "Plugin
+" Plug 'DanielSiepmann/phpstorm-stubs', {'for': 'php'}
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'shawncplus/phpcomplete.vim', {'for': 'php'} 
+" Plug 'shawncplus/phpcomplete.vim', {'for': 'php'} 
 
-Plug 'Shougo/neocomplete.vim', {'for': 'php'} "Plugin
+" Plug 'Shougo/neocomplete.vim', {'for': 'php'} "Plugin
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'padawan-php/deoplete-padawan', {'for':'php'}
 Plug 'soulston/vim-listtrans' "Plugin
 Plug 'beanworks/vim-phpfmt', {'for': 'php'} "Plugin
 Plug '~/.vim/plugins/foldsearches.vim' "Plugin
 " Plug 'Rican7/php-doc-modded'
 Plug 'tobyS/vmustache'
 Plug 'tobyS/pdv'
+Plug 'ludovicchabant/vim-gutentags'
 
 call plug#end()
 
@@ -439,3 +441,23 @@ nmap ec :ll<CR>         " go to current error/warning
 nmap en :lnext<CR>      " next error/warning
 nmap ep :lprev<CR>      " previous error/warning
 
+" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Resize splits with ease
+nnoremap <C-Right> :vertical resize +5<CR>
+nnoremap <C-Left> :vertical resize -5<CR>
+nnoremap <C-Up> :res +5<CR>
+nnoremap <C-Down> :res -5<CR> 
+
+let g:acp_enableAtStartup = 0
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+command! StartPadawan call deoplete#sources#padawan#StartServer()
+command! StopPadawan call deoplete#sources#padawan#StopServer()
+command! RestartPadawan call deoplete#sources#padawan#RestartServer()
+
+let g:deoplete#enable_at_startup = 1
