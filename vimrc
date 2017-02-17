@@ -4,6 +4,7 @@ set autoindent
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
+filetype plugin indent on
 " set listchars=tab:▶\ ,trail:·,extends:\#,nbsp:.
 " Use spaces instead of tabs
 set expandtab
@@ -31,6 +32,7 @@ set tags=tags;
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 " autocmd FileType php setlocal omnifunc=phpcomplete_extended#CompletePHP
 autocmd! BufWritePost,BufEnter *.php Neomake
+autocmd! BufRead,BufWrite,BufEnter *.js Neomake
 
 call plug#begin($HOME.'/.vim/plugged') 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
@@ -60,7 +62,7 @@ Plug 'nsf/gocode', { 'for': 'go' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'scrooloose/syntastic' , { 'for': ['rust', 'javascript', 'json', 'go', 'swift'] , 'on': 'Ycm'}
+Plug 'scrooloose/syntastic' , { 'for': ['rust', 'json', 'go', 'swift'] , 'on': 'Ycm'}
 Plug 'nathanaelkane/vim-indent-guides' "Plugin
 Plug 'Raimondi/delimitMate'
 Plug 'eapache/rainbow_parentheses.vim'
@@ -96,7 +98,7 @@ Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'othree/jspc.vim'
 Plug 'moll/vim-node', { 'for': ['json', 'javascript'] }
 Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript'} "Plugin
-Plug 'Shutnik/jshint2.vim', { 'for': 'javascript'}"Plugin
+" Plug 'Shutnik/jshint2.vim', { 'for': 'javascript'}"Plugin
 Plug 'malithsen/trello-vim' "Plugin
 Plug 'suan/vim-instant-markdown', { 'for': 'markdown'} "Plugin
 Plug 'othree/xml.vim', { 'for': 'xml' } "Plugin
@@ -139,8 +141,13 @@ Plug 'beanworks/vim-phpfmt', {'for': 'php'} "Plugin
 Plug '~/.vim/plugins/foldsearches.vim' "Plugin
 " Plug 'Rican7/php-doc-modded'
 Plug 'tobyS/vmustache'
-Plug 'tobyS/pdv'
+Plug 'tobyS/pdv', {'for': 'php' }
 Plug 'ludovicchabant/vim-gutentags'
+
+Plug 'heavenshell/vim-jsdoc'
+
+
+
 
 call plug#end()
 
@@ -150,6 +157,7 @@ set rtp+=~/.fzf
 nmap z] zo]z
 nmap z[ zo[z
 nnoremap <Space> za
+vnoremap <Space> za
 
 set hlsearch
 
@@ -171,6 +179,7 @@ noremap qq <Esc>:q!<CR>
 
 
 nmap <leader>7 :TComment<CR>
+vmap <leader>7 :TComment<CR>
 :set mouse=a
 " Configure backspace so it acts as it should act
 set backspace=2 " make backspace work like most other apps
@@ -292,9 +301,6 @@ let g:buffergator_viewport_split_policy = 'R'
 " View the entire list of buffers open
 nmap <leader>bl :BuffergatorOpen<cr>
 
-" JSHint
-let jshint2_save = 0
-let jshint2_load = 0
 
 " Thesaurus
 
@@ -341,6 +347,13 @@ let g:neomake_php_phpcs_maker = {
             \ }
 
 let g:neomake_php_enabled_makers = ['phpcs']
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_eslint_maker = {
+            \ 'exe': '/usr/local/bin/eslint',
+            \ 'args': ['--no-color', '--format', 'compact', '--config', '.eslintrc'],
+            \ 'errorformat': '%f: line %l\, col %c\, %m'
+            \ }
 
 nnoremap <leader>e :e $MYVIMRC<CR>
 nnoremap <leader>s :w<CR> :so $MYVIMRC<CR>
@@ -432,14 +445,12 @@ set guifont=Ubuntu\ Mono\ derivative\ Powerline:h18
 
 let g:phpfmt_standard = "~/moodles/current/moodle/vendor/phpunit/dbunit/build/PHPCS/ruleset.xml"
 
-let g:neomake_open_list = 2
-
 " neomake
-nmap lo :lopen<CR>      " open location window
-nmap lc :lclose<CR>     " close location window
-nmap ec :ll<CR>         " go to current error/warning
-nmap en :lnext<CR>      " next error/warning
-nmap ep :lprev<CR>      " previous error/warning
+" nmap lc :lclose<CR>     " close location window
+" nmap lo :lopen<CR>      " open location window
+" nmap ec :ll<CR>         " go to current error/warning
+" nmap en :lnext<CR>      " next error/warning
+" nmap ep :lprev<CR>      " previous error/warning
 
 " Move visual block
 vnoremap J :m '>+1<CR>gv=gv
@@ -461,3 +472,18 @@ command! StopPadawan call deoplete#sources#padawan#StopServer()
 command! RestartPadawan call deoplete#sources#padawan#RestartServer()
 
 let g:deoplete#enable_at_startup = 1
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_altv = 1
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 25
+
+noremap <leader>p :JsDoc<CR>
+map <c-f> :call JsBeautify()<cr>
+
+nmap <Leader><Space>o :lopen<CR>      " open location window
+nmap <Leader><Space>c :lclose<CR>     " close location window
+nmap <Leader><Space>, :ll<CR>         " go to current error/warning
+nmap <Leader><Space>n :lnext<CR>      " next error/warning
+nmap <Leader><Space>p :lprev<CR>      " previous error/warning
